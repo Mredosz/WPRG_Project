@@ -61,28 +61,55 @@
     <div class="container-fluid">
         <h1 class="container-h1">About</h1>
         <div class="row">
-            <div class="hov-img">
-                <img src="/image/about1.jpg" alt="Welcome" class="hov-img-bottom img-fluid">
-                <div class="hov-img-top hov-img-slideup">
-                    <div class="hov-img-text">
-                        <h5>Welcome</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin nulla metus, sit
-                            amet facilisis ligula interdum vel. Proin dictum malesuada venenatis. Nullam a vulputate
-                            felis, quis consectetur nisl. Maecenas ut est quis justo cursus ultricies sit amet eleifend
-                            lectus. Vestibulum eu tincidunt metus. Sed non nibh suscipit, blandit erat vitae, blandit
-                            nibh. Sed semper lacus orci, ut elementum felis sagittis ac. Vivamus hendrerit sapien
-                            turpis, et condimentum dui suscipit eget. Praesent viverra justo sed lorem sodales lacinia.
-                            Quisque dictum venenatis nunc, sed laoreet leo. Pellentesque habitant morbi tristique
-                            senectus et netus et malesuada fames ac turpis egestas. Cras fermentum dolor nec diam
-                            commodo aliquet. Curabitur at augue vitae risus accumsan varius. Pellentesque leo enim,
-                            tempor sed quam at, ullamcorper rutrum dui.</p>
+            <div class="col-sm-5">
+
+                <div class="hov-img">
+                    <img src="/image/about1.jpg" alt="Welcome" class="hov-img-bottom img-fluid">
+                    <div class="hov-img-top hov-img-slideup">
+                        <div class="hov-img-text">
+                            <h5>Welcome</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin nulla metus,
+                                sit
+                                amet facilisis ligula interdum vel. Proin dictum malesuada venenatis. Nullam a vulputate
+                                felis, quis consectetur nisl. Maecenas ut est quis justo cursus ultricies sit amet
+                                eleifend
+                                lectus. Vestibulum eu tincidunt metus. Sed non nibh suscipit, blandit erat vitae,
+                                blandit
+                                nibh. Sed semper lacus orci, ut elementum felis sagittis ac. Vivamus hendrerit sapien
+                                turpis, et condimentum dui suscipit eget. Praesent viverra justo sed lorem sodales
+                                lacinia.
+                                Quisque dictum venenatis nunc, sed laoreet leo. Pellentesque habitant morbi tristique
+                                senectus et netus et malesuada fames ac turpis egestas. Cras fermentum dolor nec diam
+                                commodo aliquet. Curabitur at augue vitae risus accumsan varius. Pellentesque leo enim,
+                                tempor sed quam at, ullamcorper rutrum dui.</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="hov-img">
+                    <img src="/image/about2.jpg" alt="Delicious meals" class="hov-img-bottom img-fluid">
+                    <div class="hov-img-top hov-img-slideup">
+                        <div class="hov-img-text">
+                            <h5>Delicious meals</h5>
+                            <p>Cras sit amet metus auctor, aliquet lectus sed, gravida enim. Aenean rutrum malesuada
+                                mauris vel
+                                convallis. Quisque ultricies fringilla ligula, vitae efficitur ex porttitor at. Nam
+                                efficitur ante
+                                vel erat auctor, non auctor purus ultricies. Quisque maximus nisl non mi laoreet
+                                ultrices. Donec sit
+                                amet mollis ligula. Quisque ut nulla scelerisque, ultrices metus id, condimentum nunc.
+                                In vel justo
+                                non leo ullamcorper vehicula vitae a turpis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hov-img">
+
                 </div>
             </div>
         </div>
     </div>
-
-
 </section>
 
 </body>
