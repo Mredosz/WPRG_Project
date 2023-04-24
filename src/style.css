@@ -1,3 +1,40 @@
+html, body{
+    overflow-x: hidden;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style-type: none;
+}
+a:hover, a:focus{
+    text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6{
+    text-transform: none;
+    font-weight: 600;
+    text-align: center;
+}
+hr{
+    border-color: #ffc266;
+    border-width: 5px;
+    max-width: 100%;
+}
+
+.container-h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 50px auto;
+    color: #333;
+}
+
+section{
+    align-items: center;
+    padding: 50px 60px;
+}
+
 /*  ******* Header + Navigation ******* */
 
 .navbar {
@@ -55,7 +92,7 @@
     opacity: 0.9;
 }
 
-.jumbotron {
+.jumbo {
     margin-bottom: 0px;
     background-image: url("../image/background.jpg");
     background-position: 0% 25%;
@@ -67,17 +104,18 @@
 }
 
 
-.jumbotron .header-content-inner {
+.jumbo .header-content-inner {
     font-weight: 700;
     text-transform: none;
     margin-bottom: 0;
     margin: 200px;
 }
 
-.jumbotron h1 {
+.jumbo h1 {
     font-size: 45px;
 }
 
-.jumbotron h3 {
+.jumbo h3 {
     font-size: 25px;
 }
+
