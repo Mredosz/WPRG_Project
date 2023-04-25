@@ -6,6 +6,8 @@
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!--    Custom JS-->
+<!--    <script src="script.js"></script>-->
     <!--    Website icon-->
     <link rel="icon" href="/image/icon.ico">
     <!-- Bootstrap CSS -->
@@ -14,6 +16,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <!--    Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <!-- Bootstrap JavaScript previous version-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -78,7 +86,7 @@
                                 nibh. Sed semper lacus orci, ut elementum felis sagittis ac. Vivamus hendrerit sapien
                                 turpis, et condimentum dui suscipit eget. Praesent viverra justo sed lorem sodales
                                 lacinia.
-                                </p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -119,8 +127,8 @@
             </div>
             <div class="col-sm-7">
                 <div class="row">
-                        <h3 class="section-heading">Shrek's Restaurant</h3>
                     <div class="restaurant-history  text-center">
+                        <h3 class="section-heading">Shrek's Restaurant</h3>
                         <p class="about-history first">Etiam maximus nibh ac turpis tempor dignissim. Aliquam erat
                             volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
                             mus. Nullam lobortis metus est, at consequat ipsum gravida ut. Curabitur nec facilisis
@@ -143,6 +151,40 @@
         </div>
     </div>
 </section>
+
+<!---------------------------------------Menu----------------------------------->
+
+<section class="bg-menu bg-section" id="menu">
+    <div class="container-fluid">
+        <h1 class="container-h1">Menu</h1>
+        <div class="row">
+
+            <!--                Nav pills-->
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#breakfast">Breakfast</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#lunch">Lunch</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#dinner">Diner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#dessert">Dessert</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#salads">Salads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#drinks">Drinks</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</section>
+
 
 </body>
 </html>

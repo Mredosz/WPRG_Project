@@ -51,11 +51,22 @@ hr {
     background-color: transparent;
     border: 1px solid #182c39;
 }
-
+textarea {
+    resize: none;
+}
 
 section {
     align-items: center;
     padding: 50px 60px;
+}
+
+.bg-section h2{
+    text-transform: none;
+    color: #ffc266;
+    background-color: #182c39;
+    margin: 50px 0;
+    padding: 25px 20px;
+    border-radius: 50px;
 }
 
 /*  ******* Header + Navigation ******* */
@@ -240,5 +251,3 @@ p.first::first-letter {
 #about .hov-img:hover .hov-img-slideup {
     transform: translateY(0);
 }
-
-
