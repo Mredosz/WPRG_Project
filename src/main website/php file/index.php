@@ -25,50 +25,22 @@
 
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-<!--Navbar-->
+<!------------------------------------Navbar------------------------------------>
 <?php
-require_once "html file/navbar.html"
+require_once "../html file/navbar.html"
 ?>
-<!--    Header-->
+<!-------------------------------------Header----------------------------------->
 <?php
-require_once "html file/header.html";
+require_once "../html file/header.html";
 ?>
-<!--Section with information about restaurant-->
+<!-----------------Section with information about restaurant-------------------->
 <?php
-require_once "html file/about.html";
+require_once "../html file/about.html";
 ?>
 <!---------------------------------------Menu----------------------------------->
-
-<section class="bg-menu bg-section" id="menu">
-    <div class="container-fluid">
-        <h1 class="container-h1">Menu</h1>
-        <div class="row">
-
-            <!--                Nav pills-->
-            <ul class="nav nav-pills" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#breakfast">Breakfast</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#lunch">Lunch</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#dinner">Diner</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#dessert">Dessert</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#salads">Salads</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#drinks">Drinks</a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</section>
+<?php
+require_once "../html file/menu.html"
+?>
 
 
 </body>
