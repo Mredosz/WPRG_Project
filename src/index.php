@@ -78,10 +78,7 @@
                                 nibh. Sed semper lacus orci, ut elementum felis sagittis ac. Vivamus hendrerit sapien
                                 turpis, et condimentum dui suscipit eget. Praesent viverra justo sed lorem sodales
                                 lacinia.
-                                Quisque dictum venenatis nunc, sed laoreet leo. Pellentesque habitant morbi tristique
-                                senectus et netus et malesuada fames ac turpis egestas. Cras fermentum dolor nec diam
-                                commodo aliquet. Curabitur at augue vitae risus accumsan varius. Pellentesque leo enim,
-                                tempor sed quam at, ullamcorper rutrum dui.</p>
+                                </p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +102,7 @@
                 </div>
 
                 <div class="hov-img">
-                    <img src="" alt="Professional staff" class="hov-img-bottom img-fluid">
+                    <img src="/image/about3.jpg" alt="Professional staff" class="hov-img-bottom img-fluid">
                     <div class="hov-img-top hov-img-slideup">
                         <div class="hov-img-text">
                             <h5>Professional staff</h5>
@@ -115,16 +112,15 @@
                                 mauris. Fusce dignissim aliquam dolor, quis dictum enim gravida vitae. Praesent faucibus
                                 libero erat, non ultrices enim scelerisque ac. Class aptent taciti sociosqu ad litora
                                 torquent per conubia nostra, per inceptos himenaeos. Duis in finibus odio, ut maximus
-                                lectus. Nam fermentum ex sed arcu bibendum consequat. Cras bibendum nec mi ut
-                                efficitur.</p>
+                                lectus. </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-7">
                 <div class="row">
-                    <div class="restaurant-history slideanim text-center">
                         <h3 class="section-heading">Shrek's Restaurant</h3>
+                    <div class="restaurant-history  text-center">
                         <p class="about-history first">Etiam maximus nibh ac turpis tempor dignissim. Aliquam erat
                             volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
                             mus. Nullam lobortis metus est, at consequat ipsum gravida ut. Curabitur nec facilisis
