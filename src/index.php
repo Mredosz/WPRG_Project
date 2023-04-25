@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-
+<!--Section with information about restaurant-->
 <section class="bg-about bg-section" id="about">
     <!--    class to create a full width container-->
     <div class="container-fluid">
@@ -105,7 +105,43 @@
                 </div>
 
                 <div class="hov-img">
+                    <img src="" alt="Professional staff" class="hov-img-bottom img-fluid">
+                    <div class="hov-img-top hov-img-slideup">
+                        <div class="hov-img-text">
+                            <h5>Professional staff</h5>
+                            <p>Ut eros nibh, blandit ut imperdiet non, gravida in augue. Sed sit amet est ac magna porta
+                                dictum at ac lacus. Aliquam dictum gravida mauris nec efficitur. Nullam efficitur tellus
+                                et erat maximus porta. Integer eget turpis elementum, rhoncus ligula id, ultrices
+                                mauris. Fusce dignissim aliquam dolor, quis dictum enim gravida vitae. Praesent faucibus
+                                libero erat, non ultrices enim scelerisque ac. Class aptent taciti sociosqu ad litora
+                                torquent per conubia nostra, per inceptos himenaeos. Duis in finibus odio, ut maximus
+                                lectus. Nam fermentum ex sed arcu bibendum consequat. Cras bibendum nec mi ut
+                                efficitur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="restaurant-history slideanim text-center">
+                        <h3 class="section-heading">Shrek's Restaurant</h3>
+                        <p class="about-history first">Etiam maximus nibh ac turpis tempor dignissim. Aliquam erat
+                            volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                            mus. Nullam lobortis metus est, at consequat ipsum gravida ut. Curabitur nec facilisis
+                            lacus. Duis et lectus nunc. Donec mollis quam vel tortor congue consequat.</p>
 
+                        <button type="button" class="btn more" id="more" data-toggle="collapse" data-target="#demo">
+                            More
+                        </button>
+                        <div class="collapse" id="demo">
+                            <p class="about-history">Aenean bibendum malesuada metus, quis dapibus turpis placerat sit
+                                amet. Nulla posuere turpis nibh. Cras faucibus metus ut enim blandit commodo. Quisque
+                                porta pharetra vestibulum. Pellentesque sed rutrum urna, a condimentum libero. Integer
+                                auctor nibh vel dictum fermentum. Sed dolor elit, vehicula sit amet elit vel, sagittis
+                                finibus massa. Vivamus id lectus dui. In pulvinar efficitur iaculis. Suspendisse auctor
+                                lorem at nisi ornare sagittis. Suspendisse at sem accumsan turpis viverra aliquam.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
