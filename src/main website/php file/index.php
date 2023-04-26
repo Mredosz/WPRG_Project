@@ -7,7 +7,7 @@
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../style.css">
     <!--    Custom JS-->
-<!--    <script src="script.js"></script>-->
+    <!--    <script src="script.js"></script>-->
     <!--    Website icon-->
     <link rel="icon" href="/image/icon.ico">
     <!-- Bootstrap CSS -->
@@ -41,7 +41,10 @@ require_once "../html file/about.html";
 <?php
 require_once "../html file/menu.html"
 ?>
-
+<!------------------------------------Service----------------------------------->
+<?php
+require_once "../html file/service.html"
+?>
 
 </body>
 </html>
