@@ -51,6 +51,7 @@ hr {
     background-color: transparent;
     border: 1px solid #182c39;
 }
+
 textarea {
     resize: none;
 }
@@ -60,7 +61,7 @@ section {
     padding: 50px 60px;
 }
 
-.bg-section h2{
+.bg-section h2 {
     text-transform: none;
     color: #ffc266;
     background-color: #182c39;
@@ -250,4 +251,37 @@ p.first::first-letter {
 
 #about .hov-img:hover .hov-img-slideup {
     transform: translateY(0);
+}
+
+/* ******* Service ******* */
+
+#service .service-round {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 8px solid #182c39;
+    text-align: center;
+    display: inline-block;
+    padding: 10px;
+    color: #182c39;
+}
+
+#service .service-round i{
+    color: #182c39;
+}
+
+#service h4{
+    margin: 10px auto;
+    font-size: 20px;
+    color: #555;
+}
+
+#service .round:hover .fa{
+    color: #ffc266;
+    transition: color 2s;
+}
+
+#service .round:hover .service-round{
+    border-color: #ffc266;
+    transition: border-color 2s;
 }
