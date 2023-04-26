@@ -5,9 +5,9 @@
     <!--    Website Title-->
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" type="text/css" href="src/style.css">
     <!--    Custom JS-->
-    <!--    <script src="script.js"></script>-->
+        <script src="/src/script.js"></script>
     <!--    Website icon-->
     <link rel="icon" href="/image/icon.ico">
     <!-- Bootstrap CSS -->
@@ -22,29 +22,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Bootstrap JavaScript previous version-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+    <!-- Bootstrap CSS previous version-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <!------------------------------------Navbar------------------------------------>
 <?php
-require_once "../html file/navbar.html"
+require_once "src/main_website/html_file/navbar.html"
 ?>
 <!-------------------------------------Header----------------------------------->
 <?php
-require_once "../html file/header.html";
+require_once "src/main_website/html_file/header.html";
 ?>
 <!-----------------Section with information about restaurant-------------------->
 <?php
-require_once "../html file/about.html";
+require_once "src/main_website/html_file/about.html";
 ?>
 <!---------------------------------------Menu----------------------------------->
 <?php
-require_once "../html file/menu.html"
+require_once "src/main_website/html_file/menu.html"
 ?>
 <!------------------------------------Service----------------------------------->
 <?php
-require_once "../html file/service.html"
+require_once "src/main_website/html_file/service.html"
 ?>
-
+<!------------------------------------Gallery----------------------------------->
+<?php
+require_once "src/main_website/html_file/gallery.html"
+?>
 </body>
 </html>
