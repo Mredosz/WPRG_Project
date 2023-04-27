@@ -6,8 +6,6 @@
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="src/style.css">
-    <!--    Custom JS-->
-        <script src="/src/script.js"></script>
     <!--    Website icon-->
     <link rel="icon" href="/image/icon.ico">
     <!-- Bootstrap CSS -->
@@ -24,6 +22,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Bootstrap CSS previous version-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!--    Custom JS-->
+    <script src="src/script.js"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <!------------------------------------Navbar------------------------------------>
@@ -49,6 +49,10 @@ require_once "src/main_website/html_file/service.html"
 <!------------------------------------Gallery----------------------------------->
 <?php
 require_once "src/main_website/html_file/gallery.html"
+?>
+<!--------------------------------------Staff----------------------------------->
+<?php
+require_once "src/main_website/html_file/staff.html"
 ?>
 </body>
 </html>
