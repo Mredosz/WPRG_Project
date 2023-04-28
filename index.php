@@ -54,5 +54,9 @@ require_once "src/main_website/html_file/gallery.html"
 <?php
 require_once "src/main_website/html_file/staff.html"
 ?>
+<!-------------------------------------Footer----------------------------------->
+<?php
+require_once "src/main_website/html_file/footer.html"
+?>
 </body>
 </html>
