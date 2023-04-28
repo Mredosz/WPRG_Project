@@ -52,6 +52,12 @@ hr {
     border: 1px solid #182c39;
 }
 
+.hr-h3s {
+    border: 3px solid #E94B3C;
+    width: 70px;
+    margin: 0 auto 35px auto;
+}
+
 textarea {
     resize: none;
 }
@@ -127,7 +133,7 @@ section {
     opacity: 0.9;
 }
 
-.jumbo {
+.jumbotron {
     margin-bottom: 0;
     background-image: url("../image/background.jpg");
     background-position: 0 25%;
@@ -375,3 +381,41 @@ p.first::first-letter {
     height: 100%;
     width: 100%;
 }
+
+/* ******* Staff ******* */
+
+.staff-img {
+    width: 170px;
+    height: 170px;
+}
+
+#staff .thumbnail-row {
+    margin: auto 60px;
+}
+
+#staff h3 {
+    text-transform: none;
+    color: #182c39;
+    margin: 50px auto 10px auto;
+}
+
+#staff img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#staff h5 {
+    color: #222;
+    font-size: 18px;
+}
+
+#staff h6 {
+    color: #555;
+    font-size: 16px;
+}
+
+#staff img:hover {
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.9);
+    transition: .3s;
+}
+
