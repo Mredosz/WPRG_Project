@@ -304,7 +304,7 @@ p.first::first-letter {
 }
 
 #gallery .gallery {
-    margin: 0px 80px;
+    margin: 0 80px;
 }
 
 #gallery .no-gutter > [class*="col-"] {
@@ -356,7 +356,7 @@ p.first::first-letter {
     text-transform: none;
     color: #fff;
     padding: 10px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 #gallery .more-img .to-gallery h4 {
@@ -419,3 +419,93 @@ p.first::first-letter {
     transition: .3s;
 }
 
+/* ***** Footer ***** */
+
+#footer {
+    background-color: #182c39;
+    color: white;
+}
+
+#footer ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 2.2;
+}
+
+#footer h5 {
+    font-size: 18px;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#footer a {
+    color: #aaa;
+}
+
+#footer a:hover, #footer a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+#footer .footer-items .fa {
+    font-size: 17px;
+    margin-bottom: 5px;
+    background-color: white;
+    color: #182c39;
+    border-radius: 50%;
+    padding-bottom: 25px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 31px;
+    text-decoration: none;
+    transition: color 1s;
+}
+
+#footer .footer-items {
+    margin: auto;
+    padding-left: 50px;
+    font-size: 15px;
+}
+
+#footer .fa-facebook:hover, #footer .fa-instagram:hover {
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: #182c39;
+}
+
+.footer-copyright p {
+    text-align: center;
+    color: #ccc;
+    font-size: 15px;
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+
+#footer .hr-foot {
+    width: 80%;
+    margin: 10px auto;
+    border: 1px solid #fff;
+}
+
+#footer .to-top {
+    color: #fff;
+    font-size: 30px;
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    border-radius: 50%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5) no-repeat center;
+}
+
+#footer .to-top:hover {
+    background-color: #222;
+    color: #fff;
+    transition: all 1s ease;
+}
