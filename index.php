@@ -7,7 +7,7 @@
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="src/style/style.css">
     <!--    Website icon-->
-    <link rel="icon" href="/image/icon21.ico">
+    <link rel="icon" href="/image/icon.ico">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <!-- Bootstrap JavaScript -->

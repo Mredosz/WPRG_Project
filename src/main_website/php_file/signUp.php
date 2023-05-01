@@ -7,7 +7,7 @@
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
     <!--    Website icon-->
-    <link rel="icon" href="../../../../WPRG_Project/image/icon6.ico">
+    <link rel="icon" href="../../../image/icon.ico">
 </head>
 <body>
 <form action="signUp.php">
