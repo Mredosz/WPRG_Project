@@ -509,3 +509,23 @@ p.first::first-letter {
     color: #fff;
     transition: all 1s ease;
 }
+
+/* ******* Contact ******* */
+
+#contact .left-box {
+    background-color: #182c39;
+    margin: 0 20px;
+    font-size: 15px;
+    text-transform: none;
+    line-height: 1.8em;
+    font-weight: 500;
+    padding: 30px 50px;
+    color: #fff;
+}
+
+#contact .left-box .span-contact {
+    color: #ffc266;
+    font-weight: 700;
+    padding-right: 20px;
+    font-size: 17px;
+}

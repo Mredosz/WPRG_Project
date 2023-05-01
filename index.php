@@ -52,6 +52,14 @@ require_once "src/main_website/html_file/gallery.html"
 <?php
 require_once "src/main_website/html_file/staff.html"
 ?>
+<!------------------------------------Contact----------------------------------->
+<?php
+require_once "src/main_website/html_file/contact.html"
+?>
+<!----------------------------------------Map----------------------------------->
+<?php
+require_once "src/main_website/html_file/map.html"
+?>
 <!-------------------------------------Footer----------------------------------->
 <?php
 require_once "src/main_website/html_file/footer.html"
