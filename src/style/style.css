@@ -135,7 +135,7 @@ section {
 
 .jumbotron {
     margin-bottom: 0;
-    background-image: url("../image/background.jpg");
+    background-image: url("../../image/background.jpg");
     background-position: 0 25%;
     background-size: cover;
     background-repeat: no-repeat;
