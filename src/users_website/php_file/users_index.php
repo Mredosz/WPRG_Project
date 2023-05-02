@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['userName'])){
+//    header("Location: ../../main_website/php_file/login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +35,7 @@
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <!------------------------------------Navbar------------------------------------>
 <?php
-require_once "../../../src/users_website/html_file/navbar_users.html"
+require_once "../../../src/users_website/php_file/navbar_users.php"
 ?>
 <!-------------------------------------Header----------------------------------->
 <?php

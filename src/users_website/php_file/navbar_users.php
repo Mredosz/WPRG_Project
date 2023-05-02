@@ -19,7 +19,7 @@
                 <a class="nav-link" href="#contact">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../../../src/users_website/php_file/account.php">Account</a>
+                <a class="nav-link" href="../../../src/users_website/php_file/logout.php"><?php echo $_SESSION['userName']?></a>
             </li>
         </ul>
     </div>
