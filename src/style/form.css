@@ -5,7 +5,8 @@
 label, h1, p {
     color: #ffc266;
 }
-body{
+
+body {
     margin-bottom: 0;
     background-image: url("../../image/background.jpg");
     background-color: #182c39;
@@ -70,6 +71,25 @@ button:hover {
 /* Add padding to container elements */
 .container {
     padding: 16px;
+}
+
+.p, a {
+    font-size: 20px;
+}
+
+a {
+    color: #ffc266;
+    text-underline-offset: 0;
+}
+
+form .error{
+    margin: 10px 0;
+    display: block;
+    background: #f44336;
+    color: #ffc266;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 15px;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
