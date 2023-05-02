@@ -37,11 +37,16 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
     <!--    Website icon-->
     <link rel="icon" href="../../../image/icon.ico">
+    <!-- Bootstrap CSS previous version-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="../../../index.php">Shrek's Restaurant</a>
+    <h1 class="h">Sign up</h1>
+</nav>
 <form action="" method="post">
     <div class="container">
-        <h1 class="h1">Sign Up</h1>
         <p>Please complete the information to create an account.</p>
         <?php
         if (isset($error)) {
@@ -52,15 +57,15 @@ if (isset($_POST['submit'])) {
         ?>
         <label for="firstName"><b>First Name</b></label>
         <input type="text" name="firstName" placeholder="Enter Your First Name" required
-               value="<?php if(isset($_POST['firstName'])) { echo $_POST['firstName']; } ?>>
+               value="<?php if(isset($_POST['firstName'])) { echo $_POST['firstName']; } ?>">
 
         <label for="lastName"><b>Last Name</b></label>
         <input type="text" name="lastName" placeholder="Enter Your Last Name" required
-               value="<?php if(isset($_POST['lastName'])) { echo $_POST['lastName']; } ?>>
+               value="<?php if(isset($_POST['lastName'])) { echo $_POST['lastName']; } ?>" >
 
         <label for="email"><b>E-mail</b></label>
         <input type="email" name="email" placeholder="Enter Your E-mail" required
-               value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>>
+               value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>">
 
         <label for="password"><b>Password</b></label>
         <input type="password" name="password" placeholder="Enter Your Password" required>
@@ -72,8 +77,8 @@ if (isset($_POST['submit'])) {
             <a href="../../../index.php">
                 <button type="button" class="cancelbtn">Cancel</button>
             </a>
-            <button type="submit" class="signupbtn" name="submit">Sign Up</button>
-            <p class="p">You already have account? <a href="logIn.php">Log in</a></p>
+            <a><button type="submit" class="signupbtn" name="submit">Sign Up</button></a>
+            <p class="p">You already have account? <a href="logIn.php" id="a">Log in</a></p>
         </div>
     </div>
 </form>

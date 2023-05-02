@@ -1,9 +1,22 @@
 * {
     box-sizing: border-box;
 }
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
 
-label, h1, p {
+a {
+    text-decoration: none;
+}
+
+label, .h, p {
     color: #ffc266;
+}
+
+.h{
+    padding-left: 30%;
+    font-size: 31px;
 }
 
 body {
@@ -70,6 +83,7 @@ button:hover {
 
 /* Add padding to container elements */
 .container {
+    /*margin-top: 70px;*/
     padding: 16px;
 }
 
@@ -77,9 +91,8 @@ button:hover {
     font-size: 20px;
 }
 
-a {
+#a {
     color: #ffc266;
-    text-underline-offset: 0;
 }
 
 form .error{
@@ -90,6 +103,24 @@ form .error{
     border-radius: 5px;
     font-size: 20px;
     padding: 15px;
+}
+
+.navbar {
+    background-color: #182c39;
+    border-color: rgb(51, 17, 0);
+    border-color: rgba(51, 17, 0, 0.2);
+    font-weight: 700;
+    padding: 15px 0;
+    transition: padding .5s;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 25px;
+    padding-left: 15px;
+    text-shadow: black 0.3em 0.3em 0.3em;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */

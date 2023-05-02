@@ -31,11 +31,16 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
     <!--    Website icon-->
     <link rel="icon" href="../../../image/icon.ico">
+    <!-- Bootstrap CSS previous version-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="../../../index.php">Shrek's Restaurant</a>
+    <h1 class="h">Log in</h1>
+</nav>
 <form action="" method="post">
     <div class="container">
-        <h1 class="h1">Log in</h1>
         <p>Please complete the information to log in.</p>
 
         <?php
@@ -57,8 +62,8 @@ if (isset($_POST['submit'])) {
             <a href="../../../index.php">
                 <button type="button" class="cancelbtn">Cancel</button>
             </a>
-            <button type="submit" class="signupbtn" name="submit">Sign Up</button>
-            <p>You don't have account? <a href="signUp.php">Sing up</a></p>
+            <a><button type="submit" class="signupbtn" name="submit">Sign Up</button></a>
+            <p>You don't have account? <a href="signUp.php" id="a">Sing up</a></p>
         </div>
     </div>
 </form>
