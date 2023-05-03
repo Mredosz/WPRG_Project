@@ -37,11 +37,11 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
     <!--    Website icon-->
     <link rel="icon" href="../../../image/icon.ico">
-    <!-- Bootstrap CSS previous version-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<nav  class="navbar bg-dark navbar-dark px-3 mb-3">
     <a class="navbar-brand" href="../../../index.php">Shrek's Restaurant</a>
     <h1 class="h">Sign up</h1>
 </nav>

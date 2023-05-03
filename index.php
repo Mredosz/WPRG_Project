@@ -18,12 +18,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <!-- Bootstrap JavaScript previous version-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Bootstrap CSS previous version-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="myPage">
+<div data-bs-spy="scroll" data-bs-target="#navbaruser"  data-bs-smooth-scroll="true" tabindex="0">
 <!------------------------------------Navbar------------------------------------>
 <?php
 require_once "src/main_website/html_file/navbar.html"
@@ -64,5 +61,6 @@ require_once "src/main_website/html_file/map.html"
 <?php
 require_once "src/main_website/html_file/footer.html"
 ?>
+</div>
 </body>
 </html>

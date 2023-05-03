@@ -145,25 +145,26 @@ section {
 }
 
 
-.jumbo .header-content-inner {
+.jumbotron .header-content-inner {
     font-weight: 700;
     text-transform: none;
     margin: 200px;
 }
 
-.jumbo h1 {
+.jumbotron h1 {
     font-size: 45px;
 }
 
-.jumbo h3 {
+.jumbotron h3 {
     font-size: 25px;
 }
 
 /****************About*****************/
 
-.bg-about {
-    margin: auto 50px;
+.bg-about, .bg-gallery, .bg-service, .bg-contact, .bg-menu, .bg-staff {
+    margin: auto 25px;
     background-color: white;
+    /*border-radius: 25px;*/
 }
 
 #about h3 {
@@ -296,7 +297,6 @@ p.first::first-letter {
 
 
 #gallery h3 {
-    font-family: 'Lato', sans-serif;
     text-transform: none;
     color: #182c39;
     margin: 50px auto 10px auto;
@@ -312,39 +312,65 @@ p.first::first-letter {
     padding-left: 0;
 }
 
-#gallery .caption-content {
+#gallery .hov-img * {
+    box-sizing: border-box;
+}
+
+#gallery .hov-img {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    max-width: 100%;
+    height: auto;
+}
+
+#gallery .hov-img img {
+    max-width: 100%;
+}
+
+#gallery .hov-img-bottom {
+    display: block;
+}
+
+#gallery .hov-img-top {
+    opacity: 0;
     position: absolute;
-    bottom: 100%;
-    left: 0;
+    top: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.8);
-    color: #f1f1f1;
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    transition: .5s ease;
-}
-
-#gallery .portfolio-item:hover .caption-content {
     bottom: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    /*ease-in-out - specifies a transition effect with a slow start and end*/
+    transition: all 0.4s ease-in-out 0s;
 }
 
-#gallery .caption-content .fa {
-    white-space: nowrap;
-    color: white;
-    font-size: 40px;
+#gallery .hov-img:hover .hov-img-top {
+    opacity: 1;
+}
+
+/* translate method moves an element from its current position*/
+#gallery .hov-img-image {
+    text-align: center;
+    font-size: 18px;
+    display: inline-block;
     position: absolute;
-    overflow: hidden;
+    text-shadow: black .2em .2em .2em;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-
 }
+
+#gallery .hov-img-slideup {
+    transform: translateY(-100%);
+}
+
+#gallery .hov-img:hover .hov-img-slideup {
+    transform: translateY(0);
+}
+
 
 #gallery .more-img {
     margin: 0 80px;
@@ -528,4 +554,27 @@ p.first::first-letter {
     font-weight: 700;
     padding-right: 20px;
     font-size: 17px;
+}
+
+#navbaruser .nav-pills li a,
+#navbaruser .nav-pills li a:focus {
+    font-weight: 500;
+    font-size: 15px;
+    color: #fff;
+    border-radius: 0;
+
+
+}
+
+#navbaruser .nav-pills li a:hover,
+#navbaruser .nav-pills li a:focus:hover {
+    color: #ffc266;
+    background-color: #212529;
+    transition: color 1s;
+}
+
+#navbaruser .nav-pills li a.active,
+#navbaruser .nav-pills li a.active:focus {
+    background-color: #212529;
+    color: #ffc266;
 }

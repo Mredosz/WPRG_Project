@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
 }
+
 html, body {
     overflow-x: hidden;
     width: 100%;
@@ -14,8 +15,8 @@ label, .h, p {
     color: #ffc266;
 }
 
-.h{
-    padding-left: 30%;
+.h {
+    padding-right: 50%;
     font-size: 31px;
 }
 
@@ -95,7 +96,7 @@ button:hover {
     color: #ffc266;
 }
 
-form .error{
+form .error {
     margin: 10px 0;
     display: block;
     background: #f44336;
@@ -121,6 +122,12 @@ form .error{
     font-size: 25px;
     padding-left: 15px;
     text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #ffc266;
+    transition: color 1s;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
