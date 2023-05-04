@@ -26,6 +26,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark bg-dark">
                         <li><a class="dropdown-item" href="orders.php">Orders</a></li>
+                        <li><a class="dropdown-item" href="addressesAdd.php">Addresses</a></li>
                         <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                         <li>
                             <hr class="dropdown-divider bg-secondary">

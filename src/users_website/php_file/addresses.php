@@ -1,30 +1,25 @@
 <?php
-include "../../main_website/php_file/config.php";
-global $conn;
-$usersID = $_SESSION['usersID'];
-$selectAddresses = "SELECT * FROM address WHERE usersID ='$usersID'";
-$resultAddresses = mysqli_query($conn, $selectAddresses);
-if (isset($_POST['submit'])) {
-
-//    if (isset($_POST['city']) && isset($_POST['zipCode']) && isset($_POST['street']) && isset($_POST['homeNumber'])) {
-
-$city = mysqli_escape_string($conn, $_POST['city']);
-$zipCode = mysqli_escape_string($conn, $_POST['zipCode']);
-$street = mysqli_escape_string($conn, $_POST['street']);
-$homeNumber = mysqli_escape_string($conn, $_POST['homeNumber']);
-
-$select = "SELECT * FROM Users WHERE usersID = '$usersID'";
-$result = mysqli_query($conn, $select);
-
-if (mysqli_num_rows($result) > 0) {
-//            $selectAddresses = "SELECT * FROM address WHERE usersID ='$usersID'";
-//            $resultAddresses = mysqli_query($conn, $selectAddresses);
-
-$insertAddresses = "INSERT INTO address(usersID, city, zipCode, street, homeNumber) VALUES ('$usersID', '$city', '$zipCode', '$street', '$homeNumber')";
-    mysqli_query($conn, $insertAddresses);
-mysqli_close($conn);
-        header("Location: settings.php");
-}
-
-}
+include "addressesConnect.php";
 ?>
+
+<form method="post" action="">
+    <label for="city"><b>City</b></label>
+    <input type="text" name="city" placeholder="Enter your City">
+
+    <label for="zipCode"><b>Zip Code</b></label>
+    <input type="text" name="zipCode" placeholder="Enter your zip code">
+
+    <label for="street"><b>Street</b></label>
+    <input type="text" name="street" placeholder="Enter your street">
+
+    <label for="homeNumber"><b>Home Number</b></label>
+    <input type="text" name="homeNumber" placeholder="Enter your home number">
+
+    <label for="homeNumber"><b>Phone Number</b></label>
+    <input type="tel" name="phoneNumber" placeholder="Enter your phone number">
+
+    <div class="clearfix">
+        <button type="reset" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn" name="submit">Add Addresses</button>
+    </div>
+</form>
