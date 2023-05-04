@@ -23,7 +23,7 @@ if (mysqli_num_rows($result) > 0) {
 $insertAddresses = "INSERT INTO address(usersID, city, zipCode, street, homeNumber) VALUES ('$usersID', '$city', '$zipCode', '$street', '$homeNumber')";
     mysqli_query($conn, $insertAddresses);
 mysqli_close($conn);
-//        header("Location: login.php");
+        header("Location: settings.php");
 }
 
 }
