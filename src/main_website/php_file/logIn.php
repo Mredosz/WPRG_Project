@@ -15,6 +15,7 @@ if (isset($_POST['submit'])) {
         $row = mysqli_fetch_array($result);
             session_start();
             $_SESSION['userName'] = $row['firstName']." ". $row['lastName'];
+            $_SESSION['usersID'] = $row['usersID'];
             header("Location: ../../users_website/php_file/users_index.php");
     } else{
         $error[] = "Wrong password or email";

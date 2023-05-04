@@ -22,7 +22,7 @@ label, .h, p {
 
 body {
     margin-bottom: 0;
-    background-image: url("../../image/background.jpg");
+    /*background-image: url("../../image/background.jpg");*/
     background-color: #182c39;
     background-position: 0 25%;
     background-size: cover;
@@ -34,7 +34,7 @@ body {
 
 /* Full-width input fields */
 
-input {
+input, select {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
