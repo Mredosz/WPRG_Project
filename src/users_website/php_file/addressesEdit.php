@@ -92,16 +92,7 @@ global $resultAddresses;
                     $sql = "UPDATE address SET city = ' " . $_POST['city'] . " ', 
                 zipCode = ' " . $_POST['zipCode'] . " ', street = ' " . $_POST['street'] . " ', homeNumber = ' " . $_POST['homeNumber'] . " ', 
                 phoneNumber = ' " . $_POST['phoneNumber'] . "' WHERE addressID = $_GET[addressID]";
-
-                    if (mysqli_query($conn, $sql)) {
-
-                        echo "Update Done Correctly";
-
-                    } else {
-
-                        echo "ERROR: $sql. " . mysqli_error($conn);
-                    }
-
+                    mysqli_query($conn, $sql);
                     header("Location:addressesEdit.php?addressID=$row[addressID]");
                     mysqli_close($conn);
                 }
