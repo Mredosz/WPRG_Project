@@ -3,6 +3,7 @@ session_start();
 include "addressesConnect.php";
 // Connect to SQL
 global $resultAddresses;
+global $usersID;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +68,8 @@ global $resultAddresses;
             $query = "SELECT * FROM address WHERE addressID = '$num'";
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_array($result);
+            if ($usersID == $row['usersID']){
             ?>
-
             <form action="" method="post">
                 <label for="city"><b>City</b></label>
                 <input type="text" name="city" value="<?php echo "$row[city]"; ?>">
@@ -91,10 +92,11 @@ global $resultAddresses;
                 if (isset($_POST['update'])) {
                     $sql = "UPDATE address SET city = ' " . $_POST['city'] . " ', 
                 zipCode = ' " . $_POST['zipCode'] . " ', street = ' " . $_POST['street'] . " ', homeNumber = ' " . $_POST['homeNumber'] . " ', 
-                phoneNumber = ' " . $_POST['phoneNumber'] . "' WHERE addressID = $_GET[addressID]";
+                phoneNumber = ' " . $_POST['phoneNumber'] . "' WHERE addressID = $_GET[addressID] AND usersID = $usersID";
                     mysqli_query($conn, $sql);
                     header("Location:addressesEdit.php?addressID=$row[addressID]");
                     mysqli_close($conn);
+                }
                 }
                 ?>
 
