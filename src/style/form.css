@@ -108,7 +108,7 @@ button:hover {
     color: #ffc266;
 }
 
-form .error {
+.error {
     margin: 10px 0;
     display: block;
     background: #f44336;
