@@ -5,26 +5,59 @@
 
             <!--                Nav pills-->
             <ul class="nav nav-pills" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#breakfast">Breakfast</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-breakfast-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-breakfast" type="button" role="tab" aria-controls="pills-breakfast"
+                            aria-selected="true">Breakfast
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#lunch">Lunch</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-lunch-tab" data-bs-toggle="pill" data-bs-target="#pills-lunch"
+                            type="button" role="tab" aria-controls="pills-lunch" aria-selected="false">Lunch
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#dinner">Dinner</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-dinner-tab" data-bs-toggle="pill" data-bs-target="#pills-dinner"
+                            type="button" role="tab" aria-controls="pills-dinner" aria-selected="false">Dinner
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#dessert">Dessert</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-dessert-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-dessert" type="button" role="tab" aria-controls="pills-dessert"
+                            aria-selected="false">Dessert
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#salads">Salads</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-salads-tab" data-bs-toggle="pill" data-bs-target="#pills-salads"
+                            type="button" role="tab" aria-controls="pills-salads" aria-selected="false">Salads
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#drinks">Drinks</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-drinks-tab" data-bs-toggle="pill" data-bs-target="#pills-drinks"
+                            type="button" role="tab" aria-controls="pills-drinks" aria-selected="false">Drinks
+                    </button>
                 </li>
             </ul>
-
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-breakfast" role="tabpanel"
+                     aria-labelledby="pills-breakfast-tab" tabindex="0">Breakfast
+                </div>
+                <div class="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="pills-lunch-tab"
+                     tabindex="0">Lunch
+                </div>
+                <div class="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="pills-dinner-tab"
+                     tabindex="0">Dinner
+                </div>
+                <div class="tab-pane fade" id="pills-dessert" role="tabpanel" aria-labelledby="pills-dessert-tab"
+                     tabindex="0">Dessert
+                </div>
+                <div class="tab-pane fade" id="pills-salads" role="tabpanel" aria-labelledby="pills-salads-tab"
+                     tabindex="0">Salads
+                </div>
+                <div class="tab-pane fade" id="pills-drinks" role="tabpanel" aria-labelledby="pills-drinks-tab"
+                     tabindex="0">Drinks
+                </div>
+            </div>
         </div>
     </div>
 </section>
