@@ -1,0 +1,15 @@
+.row-cols-1 {
+padding-top: 10%;
+}
+.h-1{
+    font-size: 300px;
+}
+.h-2{
+
+    font-size: 80px;
+}
+body{
+    background-image: url("https://media.tenor.com/K3uxrqffdCAAAAAC/capybara-orange.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

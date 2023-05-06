@@ -108,6 +108,8 @@ global $usersID;
                     header("Location:addressesEdit.php?addressID=$row[addressID]");
                     mysqli_close($conn);
                 }
+                }else{
+                header("Location: 404Error.php");
                 }
                 ?>
 
