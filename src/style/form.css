@@ -11,18 +11,25 @@ a {
     text-decoration: none;
 }
 
-label, .h, p {
+label, .h, p, td, th {
+    color: white;
+
+}
+
+label:hover, .h:hover, p:hover, td:hover, th:hover {
+    transition: color 1s;
     color: #ffc266;
 }
 
 .h {
+
     padding-left: 30%;
     font-size: 31px;
 }
 
 body {
+    background-image: url("../../image/background.jpg");
     margin-bottom: 0;
-    /*background-image: url("../../image/background.jpg");*/
     /*background-color: #182c39;*/
     background-position: 0 25%;
     background-size: cover;
@@ -74,6 +81,11 @@ button:hover {
 .cancelbtn {
     padding: 14px 20px;
     background-color: #f44336;
+}
+
+.updatebtn {
+    padding: 14px 20px;
+    background-color: goldenrod;
 }
 
 /* Float cancel and signup buttons and add an equal width */
@@ -129,6 +141,7 @@ form .error {
     color: #ffc266;
     transition: color 1s;
 }
+
 .nav-pills li a,
 .nav-pills li a:focus {
     font-weight: 500;
@@ -138,6 +151,7 @@ form .error {
 
 
 }
+
 .nav-pills li a:hover,
 .nav-pills li a:focus:hover {
     color: #ffc266;

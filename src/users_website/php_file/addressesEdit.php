@@ -86,7 +86,7 @@ global $resultAddresses;
                 <input type="tel" name="phoneNumber" value="<?php echo "$row[phoneNumber]"; ?>">
 
 
-                <input type="submit" value="Update" name="update">
+                <button type="submit" class="updatebtn" name="update">Update</button>
                 <?php
                 if (isset($_POST['update'])) {
                     $sql = "UPDATE address SET city = ' " . $_POST['city'] . " ', 
@@ -130,6 +130,7 @@ global $resultAddresses;
                     echo("<td>$row[homeNumber]</td>");
                     echo("<td>$row[phoneNumber]</td>");
                     echo ("<td><a class='btn btn-outline-dark' href=\"addressesEdit.php?addressID=$row[addressID]\">Edit</a></td>");
+                    echo ("<td><a class='btn btn-outline-dark' href=\"addressesDelete.php?addressID=$row[addressID]\">Delete</a></td>");
                     echo "</tr>";
                     echo "</tbody>";
                 }
