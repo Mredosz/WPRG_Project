@@ -5,7 +5,7 @@ $usersID = $_SESSION['usersID'];
 $selectAddresses = "SELECT * FROM address WHERE usersID ='$usersID'";
 $resultAddresses = mysqli_query($conn, $selectAddresses);
 if (isset($_POST['submit'])) {
-
+//mysqli_real_escape_string() remove all special characters from string
     $city = mysqli_escape_string($conn, $_POST['city']);
     $zipCode = mysqli_escape_string($conn, $_POST['zipCode']);
     $street = mysqli_escape_string($conn, $_POST['street']);
@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
 VALUES ('$usersID', '$city', '$zipCode', '$street', '$homeNumber', '$phoneNumber')";
         mysqli_query($conn, $insertAddresses);
         mysqli_close($conn);
+//        Moves to the same page
         header("Location: addressesAdd.php");
     }
 

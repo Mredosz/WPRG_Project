@@ -32,7 +32,7 @@ if (!isset($_SESSION['userName'])){
 <div data-bs-spy="scroll" data-bs-target="#navbaruser"  data-bs-smooth-scroll="true" tabindex="0">
 <!------------------------------------Navbar------------------------------------>
 <?php
-require_once "../../../src/users_website/php_file/navbar_users.php"
+require_once "../../../src/users_website/html_file/navbar_users.html"
 ?>
 <!-------------------------------------Header----------------------------------->
 <?php

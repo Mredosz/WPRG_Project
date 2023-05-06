@@ -1,7 +1,8 @@
 <?php
 session_start();
 //E-mail change
-if (isset($_POST['submitEmail'])){
+if (isset($_POST['submitEmail'])) {
+//    connect with database
     include "../../main_website/php_file/config.php";
     global $conn;
     $usersID = $_SESSION['usersID'];
@@ -12,26 +13,29 @@ if (isset($_POST['submitEmail'])){
     $result = mysqli_query($conn, $select);
     $selectNewEmail = "SELECT * FROM Users WHERE email = '$newEmail'";
     $resultNewEmail = mysqli_query($conn, $selectNewEmail);
-
+//    Checking if the user has entered a good old email
     if (mysqli_num_rows($result) <= 0) {
         $error[] = "Wrong email";
-    } else if (mysqli_num_rows($resultNewEmail)!=1) {
+//        Checking if a new email exists in the database
+    } else if (mysqli_num_rows($resultNewEmail) != 1) {
         $error[] = "Someone is already using this email.";
-    }else{
+    } else {
+//        Checking if emails are different
         if ($_POST['email'] == $_POST['newEmail']) {
             $error[] = "Email must be different";
         } else {
             $update = "UPDATE users SET email='$newEmail' WHERE usersID = '$usersID'";
-    session_unset();
-    session_destroy();
-    header("Location: ../../../index.php");
-    mysqli_query($conn, $update);
-    mysqli_close($conn);
+            session_unset();
+            session_destroy();
+            header("Location: ../../../index.php");
+            mysqli_query($conn, $update);
+            mysqli_close($conn);
         }
     }
 }
 //Password Change
-if (isset($_POST['submitPassword'])){
+if (isset($_POST['submitPassword'])) {
+    //    connect with database
     include "../../main_website/php_file/config.php";
     global $conn;
     $usersID = $_SESSION['usersID'];
@@ -41,10 +45,11 @@ if (isset($_POST['submitPassword'])){
 
     $select = "SELECT * FROM Users WHERE password = '$password' AND usersID = '$usersID'";
     $result = mysqli_query($conn, $select);
-
+//    Checking if the user has entered a good old password
     if (mysqli_num_rows($result) <= 0) {
         $error[] = "Wrong password";
-    }else{
+    } else {
+//        Checking if passwords are the same
         if ($_POST['newPassword'] != $_POST['newPasswordRepeat']) {
             $error[] = "Password must be the same ";
         } else {
@@ -79,8 +84,8 @@ if (isset($_POST['submitPassword'])){
     <h1 class="h">Settings</h1>
     <ul class="nav nav-pills ms-auto flex-nowrap">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Show First name and Last name user-->
                 <?php echo $_SESSION['userName'] ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark bg-dark">
@@ -98,6 +103,7 @@ if (isset($_POST['submitPassword'])){
 </nav>
 <div class="container-fluid">
     <div class="row">
+        <!--    Display errors-->
         <?php
         if (isset($error)) {
             foreach ($error as $item) {

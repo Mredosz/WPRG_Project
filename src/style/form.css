@@ -11,14 +11,23 @@ a {
     text-decoration: none;
 }
 
-label, .h, p, td, th {
+label, p {
+    font-size: 20px;
+}
+
+label, .h, p, td, th, .hlog {
     color: white;
 
 }
 
-label:hover, .h:hover, p:hover, td:hover, th:hover {
+label:hover, .h:hover, p:hover, td:hover, th:hover, .hlog:hover {
     transition: color 1s;
     color: #ffc266;
+}
+
+.hlog {
+    padding-right: 50%;
+    font-size: 31px;
 }
 
 .h {
