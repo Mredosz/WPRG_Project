@@ -1,5 +1,5 @@
 <?php
-include "../../main_website/php_file/config.php";
+include "../../../main_website/php_file/config.php";
 global $conn;
 $usersID = $_SESSION['usersID'];
 $selectAddresses = "SELECT * FROM address WHERE usersID ='$usersID'";

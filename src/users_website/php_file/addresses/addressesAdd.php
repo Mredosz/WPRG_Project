@@ -10,9 +10,9 @@ global $resultAddresses;
     <!--    Website Title-->
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
+    <link rel="stylesheet" type="text/css" href="../../../../src/style/form.css">
     <!--    Website icon-->
-    <link rel="icon" href="../../../image/icon.ico">
+    <link rel="icon" href="../../../../image/icon.ico">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <!-- Bootstrap JavaScript -->
@@ -21,7 +21,7 @@ global $resultAddresses;
 <body>
 <!--Short navbar to navigate to main website and user staff-->
 <nav class="navbar bg-dark navbar-dark px-3 mb-3">
-    <a class="navbar-brand" href="../../../../WPRG_Project/index.php">Shrek's Restaurant</a>
+    <a class="navbar-brand" href="../../../../../WPRG_Project/index.php">Shrek's Restaurant</a>
     <h1 class="h">Addresses</h1>
     <ul class="nav nav-pills ms-auto flex-nowrap">
         <li class="nav-item dropdown">
@@ -31,14 +31,14 @@ global $resultAddresses;
                 <?php echo $_SESSION['userName'] ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark bg-dark">
-                <li><a class="dropdown-item" href="orders.php">Orders</a></li>
+                <li><a class="dropdown-item" href="../orders.php">Orders</a></li>
                 <li><a class="dropdown-item" href="addressesAdd.php">Addresses</a></li>
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                <li><a class="dropdown-item" href="../settings.php">Settings</a></li>
                 <li>
                     <hr class="dropdown-divider bg-secondary">
                 </li>
                 <li><a class="dropdown-item"
-                       href="../../../src/users_website/php_file/logout.php">Log out</a></li>
+                       href="../../../../../WPRG_Project/src/users_website/php_file/logout.php">Log out</a></li>
             </ul>
         </li>
     </ul>
