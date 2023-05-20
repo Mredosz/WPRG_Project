@@ -1,14 +1,11 @@
 <?php
+include "src/constants.php";
 
 session_start();
-
-//if (!isset($_SESSION['userName'])){
-//    header("Location: ../../main_website/php_file/login.php");
-//}
-if (isset($_SESSION['userName'])){
-    $userid = 1;
+if (isset($_SESSION['rolaID'])){
+    $rolaId=$_SESSION['rolaID'];
 }else{
-    $userid =0;
+    $rolaId=2;
 }
 ?>
 <!DOCTYPE html>
@@ -36,47 +33,52 @@ if (isset($_SESSION['userName'])){
 <div data-bs-spy="scroll" data-bs-target="#navbaruser"  data-bs-smooth-scroll="true" tabindex="0">
 <!------------------------------------Navbar------------------------------------>
 <?php
-if ($userid ==0) {
-    require_once "src/main_website/html_file/navbar.html";
-}else{
-    require_once "src/users_website/html_file/navbar_users.html";
+//Login users
+if ($rolaId == 1) {
+    require_once UHTML."/navbar_users.html";
+//Guests
+}else if ($rolaId == 2){
+    require_once MHTML."/navbar.html";
+//Admin
+}else if ($rolaId == 3){
+    header("Location: src/admin_website/php_file/admin.php");
 }
 ?>
 <!-------------------------------------Header----------------------------------->
 <?php
-require_once "src/main_website/html_file/header.html";
+require_once MHTML."/header.html";
 ?>
 <!-----------------Section with information about restaurant-------------------->
 <?php
-require_once "src/main_website/html_file/about.html";
+require_once MHTML."/about.html";
 ?>
 <!---------------------------------------Menu----------------------------------->
 <?php
-require_once "src/main_website/html_file/menu.html"
+require_once MHTML."/menu.html"
 ?>
 <!------------------------------------Service----------------------------------->
 <?php
-require_once "src/main_website/html_file/service.html"
+require_once MHTML."/service.html"
 ?>
 <!------------------------------------Gallery----------------------------------->
 <?php
-require_once "src/main_website/html_file/gallery.html"
+require_once MHTML."/gallery.html"
 ?>
 <!--------------------------------------Staff----------------------------------->
 <?php
-require_once "src/main_website/html_file/staff.html"
+require_once MHTML."/staff.html"
 ?>
 <!------------------------------------Contact----------------------------------->
 <?php
-require_once "src/main_website/html_file/contact.html"
+require_once MHTML."/contact.html"
 ?>
 <!----------------------------------------Map----------------------------------->
 <?php
-require_once "src/main_website/html_file/map.html"
+require_once MHTML."/map.html"
 ?>
 <!-------------------------------------Footer----------------------------------->
 <?php
-require_once "src/main_website/html_file/footer.html"
+require_once MHTML."/footer.html"
 ?>
 </div>
 </body>
