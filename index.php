@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+//if (!isset($_SESSION['userName'])){
+//    header("Location: ../../main_website/php_file/login.php");
+//}
+if (isset($_SESSION['userName'])){
+    $userid = 1;
+}else{
+    $userid =0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +36,11 @@
 <div data-bs-spy="scroll" data-bs-target="#navbaruser"  data-bs-smooth-scroll="true" tabindex="0">
 <!------------------------------------Navbar------------------------------------>
 <?php
-require_once "src/main_website/html_file/navbar.html"
+if ($userid ==0) {
+    require_once "src/main_website/html_file/navbar.html";
+}else{
+    require_once "src/users_website/html_file/navbar_users.html";
+}
 ?>
 <!-------------------------------------Header----------------------------------->
 <?php

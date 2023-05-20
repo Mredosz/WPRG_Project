@@ -84,7 +84,7 @@ if (isset($_POST['submitPassword'])) {
 </head>
 <body>
 <nav class="navbar bg-dark navbar-dark px-3 mb-3">
-    <a class="navbar-brand" href="../../../src/users_website/php_file/users_index.php">Shrek's Restaurant</a>
+    <a class="navbar-brand" href="../../../../WPRG_Project/index.php">Shrek's Restaurant</a>
     <h1 class="h">Settings</h1>
     <ul class="nav nav-pills ms-auto flex-nowrap">
         <li class="nav-item dropdown">
