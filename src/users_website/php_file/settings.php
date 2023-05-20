@@ -50,15 +50,19 @@ if (isset($_POST['submitPassword'])) {
         $error[] = "Wrong password";
     } else {
 //        Checking if passwords are the same
-        if ($_POST['newPassword'] != $_POST['newPasswordRepeat']) {
-            $error[] = "Password must be the same ";
-        } else {
-            $update = "UPDATE users SET password='$newPassword' WHERE usersID = '$usersID'";
-            session_unset();
-            session_destroy();
-            header("Location: ../../../index.php");
-            mysqli_query($conn, $update);
-            mysqli_close($conn);
+        if ($password == $newPassword){
+            $error[] = "Old password and new password must be different";
+        }else {
+            if ($_POST['newPassword'] != $_POST['newPasswordRepeat']) {
+                $error[] = "Password must be the same ";
+            } else {
+                $update = "UPDATE users SET password='$newPassword' WHERE usersID = '$usersID'";
+                session_unset();
+                session_destroy();
+                header("Location: ../../../index.php");
+                mysqli_query($conn, $update);
+                mysqli_close($conn);
+            }
         }
     }
 }
