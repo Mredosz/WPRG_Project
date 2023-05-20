@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
             $error[] = "Passwords must be the same";
         } else {
 //Add new values into sql
-            $insert = "INSERT INTO Users(firstName, lastName, email, password) VALUES ('$firstName', '$lastName', '$email', '$password')";
+            $insert = "INSERT INTO Users(firstName, lastName, email, password, rolaID) VALUES ('$firstName', '$lastName', '$email', '$password', 2)";
             mysqli_query($conn, $insert);
 //Send users to login page
             header("Location: login.php");

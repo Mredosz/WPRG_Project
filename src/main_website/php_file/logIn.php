@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
         session_start();
         $_SESSION['userName'] = $row['firstName'] . " " . $row['lastName'];
         $_SESSION['usersID'] = $row['usersID'];
+        $_SESSION['rolaID'] = $row['rolaID'];
         header("Location: ../../../index.php");
     } else {
         $error[] = "Wrong password or email";
