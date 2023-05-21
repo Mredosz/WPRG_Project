@@ -144,7 +144,7 @@ require_once "navbar.php";
                         $status = 'Disable';
                     }
                     echo("<td>$status</td>");
-                    echo("<td>$row[imageName]</td>");
+                    echo("<td><img src='../../../image/food/$row[imageName]' width='100px'></td>");
 //                Link to a subpage for editing a given address
                     echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
 //                Link to a subpage for delete a given address
