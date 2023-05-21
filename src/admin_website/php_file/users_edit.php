@@ -79,6 +79,8 @@ require_once "navbar.php";
                 <button type="submit" class="updatebtn" name="update">Update</button>
                 <?php
                 //                Update changes into database
+                // trim remove all white space front and back of string
+
                 if (isset($_POST['update'])) {
                     $firstName = trim(mysqli_escape_string($conn, $_POST['firstName']));
                     $lastName = trim(mysqli_escape_string($conn, $_POST['lastName']));
