@@ -12,33 +12,9 @@ if (isset($_POST['submit'])) {
     $category = trim(mysqli_real_escape_string($conn, $_POST['category']));
     $status = trim(mysqli_real_escape_string($conn, $_POST['status']));
 
-    if (isset($_FILES['image']['name'])) {
-        $imageName = $_FILES['image']['name'];
-        echo $imageName;
-        if ($imageName != "") {
-            //extension upload file
-            $array = explode('.', $imageName);
-            $ext = end($array);
 
-            $imageName = "FOOD-NAME-" . rand(0, 9999) . "." . $ext;
-            $src = $_FILES['image']['tmp_name'];
-            $path = "../../../image/food/" . $imageName;
-
-            //move upload file to new location
-            $upload = move_uploaded_file($src, $path);
-
-            if (!$upload) {
-                $error[] = "Failed to upload file";
-                header("Location: menu.php");
-                die();
-            }
-        }
-    } else {
-        $imageName = "";
-    }
-
-    $insertCategory = "INSERT INTO item(name, price, categoryID, status, imageName)
-    VALUES ('$name', '$price', '$category', '$status', '$imageName')";
+    $insertCategory = "INSERT INTO item(name, price, categoryID, status)
+    VALUES ('$name', '$price', '$category', '$status')";
 
     mysqli_query($conn, $insertCategory);
     mysqli_close($conn);
@@ -99,8 +75,6 @@ require_once "navbar.php";
                     }
                     ?>
                 </select>
-                <label for="image"><b>Photo</b></label>
-                <input name="image" type="file">
 
                 <label><b>Status on website</b></label><br>
                 <input type="radio" class="btn-check" name="status" id="option1" value="1" checked>
@@ -124,11 +98,10 @@ require_once "navbar.php";
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Photo</th>
                 </tr>
                 </thead>
                 <?php
-                $selectItem = "SELECT item.name, price, c.name AS category , status, itemID, imageName FROM item 
+                $selectItem = "SELECT item.name, price, c.name AS category , status, itemID FROM item 
                                 JOIN category c on c.categoryID = item.categoryID";
                 $resultItem = mysqli_query($conn, $selectItem);
                 //            mysqli_fetch_array() - associative array
@@ -144,7 +117,6 @@ require_once "navbar.php";
                         $status = 'Disable';
                     }
                     echo("<td>$status</td>");
-                    echo("<td><img src='../../../image/food/$row[imageName]' width='100px'></td>");
 //                Link to a subpage for editing a given address
                     echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
 //                Link to a subpage for delete a given address

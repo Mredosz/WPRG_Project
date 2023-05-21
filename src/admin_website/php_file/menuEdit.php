@@ -36,7 +36,7 @@ require_once "navbar.php";
         <div class="col-4">
             <?php
             $num = $_GET['itemID'];
-            $query = "SELECT item.name, price, c.name AS category , status, itemID, imageName FROM item 
+            $query = "SELECT item.name, price, c.name AS category , status, itemID FROM item 
                                 JOIN category c on c.categoryID = item.categoryID WHERE itemID ='$num'";
 
             $result = mysqli_query($conn, $query);
@@ -104,11 +104,10 @@ require_once "navbar.php";
                     <th scope="col">Price</th>
                     <th scope="col">Category</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Photo</th>
                 </tr>
                 </thead>
                 <?php
-                $queryItem = "SELECT item.name, price, c.name AS category , status, itemID, imageName FROM item 
+                $queryItem = "SELECT item.name, price, c.name AS category , status, itemID FROM item 
                                 JOIN category c on c.categoryID = item.categoryID";
                 $resultItem = mysqli_query($conn, $queryItem);
                 //            mysqli_fetch_array() - associative array
@@ -124,7 +123,6 @@ require_once "navbar.php";
                         $status = 'Disable';
                     }
                     echo("<td>$status</td>");
-                    echo("<td>$row[imageName]</td>");
 //                Link to a subpage for editing a given address
                     echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
 //                Link to a subpage for delete a given address
