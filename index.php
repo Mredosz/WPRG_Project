@@ -54,7 +54,7 @@ require_once MHTML."/about.html";
 ?>
 <!---------------------------------------Menu----------------------------------->
 <?php
-require_once MHTML."/menu.html"
+require_once MPHP."/menu.php"
 ?>
 <!------------------------------------Service----------------------------------->
 <?php
