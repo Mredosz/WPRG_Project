@@ -1,22 +1,9 @@
 <?php
-//include "../php_file/config.php";
-//global $conn;
-$conn = mysqli_connect('localhost', 'root', '', 'project');
-
-$selectBreakfast = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Breakfast'";
-$resultBreakfast = mysqli_query($conn, $selectBreakfast);
-$selectLunch = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Lunch'";
-$resultLunch = mysqli_query($conn, $selectLunch);
-$selectDinner = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Dinner'";
-$resultDinner = mysqli_query($conn, $selectDinner);
-$selectDessert = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Dessert'";
-$resultDessert = mysqli_query($conn, $selectDessert);
-$selectSalads = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Salads'";
-$resultSalads = mysqli_query($conn, $selectSalads);
-$selectDrinks = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='Drinks'";
-$resultDrinks = mysqli_query($conn, $selectDrinks);
-mysqli_close($conn);
-function menu($result){
+function menu($name){
+    global $conn;
+    include "config.php";
+    $select = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID WHERE c.name ='$name'";
+    $result = mysqli_query($conn, $select);
     echo "<table class=\"table\">";
                         echo "<thead>";
                         echo "<tr>";
@@ -37,6 +24,7 @@ function menu($result){
                         }
 
              echo"</table>";
+    mysqli_close($conn);
 }
 ?>
 <section class="bg-menu bg-section" id="menu">
@@ -85,37 +73,37 @@ function menu($result){
                 <div class="tab-pane fade show active" id="pills-breakfast" role="tabpanel"
                      aria-labelledby="pills-breakfast-tab" tabindex="0">
                     <?php
-                    menu($resultBreakfast);
+                    menu("Breakfast");
                     ?>
                 </div>
                 <div class="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="pills-lunch-tab"
                      tabindex="0">
                     <?php
-                    menu($resultLunch);
+                    menu("Lunch");
                     ?>
                 </div>
                 <div class="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="pills-dinner-tab"
                      tabindex="0">
                     <?php
-                    menu($resultDinner);
+                    menu("Dinner");
                     ?>
                 </div>
                 <div class="tab-pane fade" id="pills-dessert" role="tabpanel" aria-labelledby="pills-dessert-tab"
                      tabindex="0">
                     <?php
-                    menu($resultDessert);
+                    menu("Dessert");
                     ?>
                 </div>
                 <div class="tab-pane fade" id="pills-salads" role="tabpanel" aria-labelledby="pills-salads-tab"
                      tabindex="0">
                     <?php
-                    menu($resultSalads);
+                    menu("Salads");
                     ?>
                 </div>
                 <div class="tab-pane fade" id="pills-drinks" role="tabpanel" aria-labelledby="pills-drinks-tab"
                      tabindex="0">
                     <?php
-                    menu($resultDrinks);
+                    menu("Drinks");
                     ?>
                 </div>
             </div>
