@@ -33,6 +33,15 @@ button {
     opacity: 0.9;
 }
 
+.btn1 {
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
 button:hover {
     opacity: 1;
 }
@@ -46,4 +55,9 @@ button:hover {
 .updatebtn {
     padding: 14px 20px;
     background-color: goldenrod;
+}
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn, .btn1 {
+    float: left;
+    width: 50%;
 }
