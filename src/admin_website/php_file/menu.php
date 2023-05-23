@@ -101,7 +101,7 @@ require_once "navbar.php";
                 </tr>
                 </thead>
                 <?php
-                $selectItem = "SELECT item.name, price, c.name AS category , status, itemID FROM item 
+                $selectItem = "SELECT item.name, price, c.name AS category , item.status, itemID FROM item 
                                 JOIN category c on c.categoryID = item.categoryID";
                 $resultItem = mysqli_query($conn, $selectItem);
                 //            mysqli_fetch_array() - associative array
@@ -117,9 +117,9 @@ require_once "navbar.php";
                         $status = 'Disable';
                     }
                     echo("<td>$status</td>");
-//                Link to a subpage for editing a given address
+//                Link to a subpage for editing a given item
                     echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
-//                Link to a subpage for delete a given address
+//                Link to a subpage for delete a given item
                     echo("<td><a class='btn btn-outline-dark' href=\"menuDelete.php?itemID=$row[itemID]\">Delete</a></td>");
                     echo "</tr>";
                     echo "</tbody>";

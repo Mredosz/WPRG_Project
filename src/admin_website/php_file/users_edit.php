@@ -129,9 +129,9 @@ require_once "navbar.php";
                     echo("<td>$row[email]</td>");
                     echo("<td>$row[password]</td>");
                     echo("<td>$row[rola]</td>");
-//                Link to a subpage for editing a given address
+//                Link to a subpage for editing a given user
                     echo("<td><a class='btn btn-outline-dark' href=\"users_edit.php?usersID=$row[usersID]\">Edit</a></td>");
-//                Link to a subpage for delete a given address
+//                Link to a subpage for delete a given user
                     echo("<td><a class='btn btn-outline-dark' href=\"users_delete.php?usersID=$row[usersID]\">Delete</a></td>");
                     echo "</tr>";
                     echo "</tbody>";

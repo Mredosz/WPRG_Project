@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../../main_website/php_file/config.php";
 global $conn;
@@ -36,7 +37,7 @@ require_once "navbar.php";
         <div class="col-4">
             <?php
             $num = $_GET['itemID'];
-            $query = "SELECT item.name, price, c.name AS category , status, itemID FROM item 
+            $query = "SELECT item.name, price, c.name AS category, c.categoryID AS categoryID , status, itemID FROM item 
                                 JOIN category c on c.categoryID = item.categoryID WHERE itemID ='$num'";
 
             $result = mysqli_query($conn, $query);
@@ -60,17 +61,16 @@ require_once "navbar.php";
                         $id = $row['categoryID'];
                         $name = $row['name'];
                         ?>
-                        <option value="<?php echo $id; ?>"><?php echo $name; ?> </option>
+                        <option value="<?php echo $id; ?>"<?php if($id == $rowItem['categoryID']){echo"selected";} ?>><?php echo $name; ?></option>
                         <?php
                     }
                     ?>
                 </select>
-
                 <label><b>Status on website</b></label><br>
-                <input type="radio" class="btn-check" name="status" id="option1" value="1" checked>
+                <input type="radio" class="btn-check" name="status" id="option1" value="1"<?php if($rowItem['status'] == '1'){echo "checked";} ?>>
                 <label class="btn btn-outline-dark btn1" for="option1">ON</label>
 
-                <input type="radio" class="btn-check" name="status" id="option2" value="0">
+                <input type="radio" class="btn-check" name="status" id="option2" value="0"<?php if($rowItem['status'] == '0'){echo "checked";} ?>>
                 <label class="btn btn-outline-dark btn1" for="option2">OFF</label>
 
                 <div class="clearfix">
@@ -123,13 +123,14 @@ require_once "navbar.php";
                         $status = 'Disable';
                     }
                     echo("<td>$status</td>");
-//                Link to a subpage for editing a given address
+//                Link to a subpage for editing a given item
                     echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
-//                Link to a subpage for delete a given address
+//                Link to a subpage for delete a given item
                     echo("<td><a class='btn btn-outline-dark' href=\"menuDelete.php?itemID=$row[itemID]\">Delete</a></td>");
                     echo "</tr>";
                     echo "</tbody>";
                 }
+                mysqli_close($conn);
                 ?>
             </table>
         </div>
