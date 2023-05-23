@@ -7,6 +7,9 @@
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarNav">
             <ul class="navbar-nav ms-auto flex-nowrap">
                 <li class="nav-item">
+                    <a class="nav-link" href="category.php">Category</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="menu.php">Menu</a>
                 </li>
                 <li class="nav-item">
