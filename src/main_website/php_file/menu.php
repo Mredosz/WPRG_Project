@@ -1,8 +1,7 @@
 <?php
 global $conn;
 include "config.php";
-function menu($name)
-{
+function menu($name){
     ?>
     <div class="row">
         <div class="col">
@@ -51,6 +50,55 @@ function menu($name)
     <?php
     mysqli_close($conn);
 }
+function mostPopular($name){
+    ?>
+    <div class="row">
+        <div class="col">
+            <!--            Display information about item from menu-->
+            <?php
+            global $conn;
+            include "config.php";
+//            $select = "SELECT item.name, price FROM item JOIN category c on c.categoryID = item.categoryID
+//                                   WHERE c.name ='$name' and status ='1'";
+//            $result = mysqli_query($conn, $select);
+            echo "<table class=\"table\">";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th scope=\"col\">Name</th>";
+            echo "<th scope=\"col\">Price</th>";
+            //                            echo "<th scope=\"col\">Picture</th>";
+            echo "</tr>";
+            echo "</thead>";
+            //            mysqli_fetch_array() - associative array
+//            while ($row = mysqli_fetch_array($result)) {
+                echo "<tbody>";
+                echo "<tr>";
+//                echo("<td>$row[name]</td>");
+//                echo("<td>$row[price] $</td>");
+//                            echo("<td><img src='../../../image/food/$row[imageName]' width='150px'></td>");
+//                            echo("<td>$row[phoneNumber]</td>");
+                echo "</tr>";
+                echo "</tbody>";
+//            }
+
+            echo "</table>";
+            //            Select from category tab
+            $selectCategory = "SELECT * FROM category WHERE name = '$name'";
+            $resultCategory = mysqli_query($conn, $selectCategory);
+            $rowCategory = mysqli_fetch_array($resultCategory);
+            ?>
+        </div>
+        <div class="col-4">
+            <!--            Display image and category name from database-->
+            <div class="right-cover">
+                <h3><?php echo $rowCategory['name']; ?></h3>
+                <img src='../../../image/food/<?php echo $rowCategory['imageName']; ?>' class="img-fluid" ">
+            </div>
+        </div>
+    </div>
+    <?php
+    mysqli_close($conn);
+}
 
 ?>
 <section class="bg-menu bg-section" id="menu">
@@ -88,13 +136,12 @@ function menu($name)
                 <?php
                 $select = "SELECT * FROM category WHERE statusCategory = '1'";
                 $result = mysqli_query($conn, $select);
-                $j = 0;
                 while ($row = mysqli_fetch_array($result)) {
-                    if ($j == 0) {
+                    if ($row['categoryID'] == 1) {
                         ?>
                         <div class="tab-pane container active" id="<?php echo $row['categoryID']; ?>">
                             <?php
-                            menu($row['name']);
+                            mostPopular($row['name']);
                             ?>
                         </div>
                         <?php
@@ -107,7 +154,6 @@ function menu($name)
                         </div>
                         <?php
                     }
-                    $j++;
                 }
                 ?>
             </div>
