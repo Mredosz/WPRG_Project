@@ -3,50 +3,44 @@ session_start();
 //E-mail change
 if (isset($_POST['submitEmail'])) {
 //    connect with database
-    include "../../main_website/php_file/config.php";
-    global $conn;
+    require_once "../../class/Database.php";
     $usersID = $_SESSION['usersID'];
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $newEmail = mysqli_real_escape_string($conn, $_POST['newEmail']);
+    $email = Database::realString($_POST['email']);
+    $newEmail = Database::realString($_POST['newEmail']);
 
-    $select = "SELECT * FROM Users WHERE email = '$email' AND usersID = '$usersID'";
-    $result = mysqli_query($conn, $select);
-    $selectNewEmail = "SELECT * FROM Users WHERE email = '$newEmail'";
-    $resultNewEmail = mysqli_query($conn, $selectNewEmail);
+    $result = Database::query("SELECT * FROM Users WHERE email = '$email' AND usersID = '$usersID'");
+    $resultNewEmail = Database::query("SELECT * FROM Users WHERE email = '$newEmail'");
 //    Checking if the user has entered a good old email
-    if (mysqli_num_rows($result) <= 0) {
+    if (Database::numRows($result) <= 0) {
         $error[] = "Wrong email";
 //        Checking if a new email exists in the database
-    } else if (mysqli_num_rows($resultNewEmail) != 1) {
+    } else if (Database::numRows($resultNewEmail) >= 1) {
         $error[] = "Someone is already using this email.";
     } else {
 //        Checking if emails are different
         if ($_POST['email'] == $_POST['newEmail']) {
             $error[] = "Email must be different";
         } else {
-            $update = "UPDATE users SET email='$newEmail' WHERE usersID = '$usersID'";
             session_unset();
             session_destroy();
             header("Location: ../../../index.php");
-            mysqli_query($conn, $update);
-            mysqli_close($conn);
+            Database::query("UPDATE users SET email='$newEmail' WHERE usersID = '$usersID'");
+            Database::disconnect();
         }
     }
 }
 //Password Change
 if (isset($_POST['submitPassword'])) {
     //    connect with database
-    include "../../main_website/php_file/config.php";
-    global $conn;
+    require_once "../../class/Database.php";
     $usersID = $_SESSION['usersID'];
     $password = md5($_POST['password']);
     $newPassword = md5($_POST['newPassword']);
     $newPasswordRepeat = md5($_POST['newPasswordRepeat']);
 
-    $select = "SELECT * FROM Users WHERE password = '$password' AND usersID = '$usersID'";
-    $result = mysqli_query($conn, $select);
+    $result = Database::query("SELECT * FROM Users WHERE password = '$password' AND usersID = '$usersID'");
 //    Checking if the user has entered a good old password
-    if (mysqli_num_rows($result) <= 0) {
+    if (Database::numRows($result) <= 0) {
         $error[] = "Wrong password";
     } else {
 //        Checking if passwords are the same
@@ -56,12 +50,11 @@ if (isset($_POST['submitPassword'])) {
             if ($_POST['newPassword'] != $_POST['newPasswordRepeat']) {
                 $error[] = "Password must be the same ";
             } else {
-                $update = "UPDATE users SET password='$newPassword' WHERE usersID = '$usersID'";
                 session_unset();
                 session_destroy();
                 header("Location: ../../../index.php");
-                mysqli_query($conn, $update);
-                mysqli_close($conn);
+                Database::query("UPDATE users SET password='$newPassword' WHERE usersID = '$usersID'");
+                Database::disconnect();
             }
         }
     }

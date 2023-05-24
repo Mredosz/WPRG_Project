@@ -1,10 +1,10 @@
 <?php
 session_start();
 // Connect to SQL
-include "addressesConnect.php";
+require_once "../../../class/Database.php";
+require_once "../../../class/Addresses.php";
 
-global $resultAddresses;
-global $usersID;
+$usersID = $_SESSION['usersID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,20 +64,17 @@ global $usersID;
         </div>
         <div class="col-4">
             <?php
+            $conn = Database::connect();
 
-            include "../../../main_website/php_file/config.php";
-
-            global $conn;
             if ($conn === false) {
                 $error[] = ("ERROR " . mysqli_connect_error());
             }
 
             //            ID in address table
             $num = $_GET['addressID'];
-            $query = "SELECT * FROM address WHERE addressID = '$num'";
-            $result = mysqli_query($conn, $query);
+
             //            mysqli_fetch_array() - associative array
-            $row = mysqli_fetch_array($result);
+            $row = mysqli_fetch_array(Database::query("SELECT * FROM address WHERE addressID = '$num'"));
             if ($usersID == $row['usersID']){
             ?>
             <!--   echo "$row[city]" ---   Display information about this address and give user possibility to edit-->
@@ -100,15 +97,7 @@ global $usersID;
                 <button type="submit" class="updatebtn" name="update">Update</button>
                 <?php
                 //                Update changes into database
-                // trim remove all white space front and back of string
-                if (isset($_POST['update'])) {
-                    $sql = "UPDATE address SET city = ' " . trim($_POST['city']) . " ', zipCode = ' " . trim($_POST['zipCode']) . " ', 
-                    street = ' " . trim($_POST['street']) . " ', homeNumber = ' " . trim($_POST['homeNumber']) . " ', 
-                phoneNumber = ' " . trim($_POST['phoneNumber']) . "' WHERE addressID = $_GET[addressID] AND usersID = $usersID";
-                    mysqli_query($conn, $sql);
-                    header("Location:addressesEdit.php?addressID=$row[addressID]");
-                    mysqli_close($conn);
-                }
+                Addresses::addressesUpdate($row, $usersID);
                 }else{
                 header("Location: ../404Error.php");
                 }
@@ -117,35 +106,9 @@ global $usersID;
             </form>
         </div>
         <div class="col-8">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">City</th>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Street</th>
-                    <th scope="col">Home Number</th>
-                    <th scope="col">Phone Number</th>
-                </tr>
-                </thead>
-                <?php
-                //            mysqli_fetch_array() - associative array
-                while ($row = mysqli_fetch_array($resultAddresses)) {
-                    echo "<tbody>";
-                    echo "<tr>";
-                    echo("<td>$row[city]</td>");
-                    echo("<td>$row[zipCode]</td>");
-                    echo("<td>$row[street]</td>");
-                    echo("<td>$row[homeNumber]</td>");
-                    echo("<td>$row[phoneNumber]</td>");
-//                    Link to a subpage for editing a given address
-                    echo("<td><a class='btn btn-outline-dark' href=\"addressesEdit.php?addressID=$row[addressID]\">Edit</a></td>");
-//                    Link to a subpage for delete a given address
-                    echo("<td><a class='btn btn-outline-dark' href=\"addressesDelete.php?addressID=$row[addressID]\">Delete</a></td>");
-                    echo "</tr>";
-                    echo "</tbody>";
-                }
-                ?>
-            </table>
+            <?php
+            Addresses::addressesDisplay($usersID);
+            ?>
         </div>
     </div>
 </div>

@@ -1,21 +1,19 @@
 <?php
 // Connect to SQL
-include "config.php";
-global $conn;
+require_once "../../class/Database.php";
 //When button sign up is clicked
 
 if (isset($_POST['submit'])) {
 //mysqli_real_escape_string() remove all special characters from string
 //md5 codding string into 32 hexadecimal number
 
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $email = Database::realString($_POST['email']);
     $password = md5($_POST['password']);
 
-    $select = "SELECT * FROM Users WHERE email = '$email' AND password = '$password'";
-    $result = mysqli_query($conn, $select);
+    $result = Database::query("SELECT * FROM Users WHERE email = '$email' AND password = '$password'");
 //When there is an account in the database with the given email and password
 //the user is logged in
-    if (mysqli_num_rows($result) > 0) {
+    if (Database::numRows($result) > 0) {
         $row = mysqli_fetch_array($result);
         session_start();
         $_SESSION['userName'] = $row['firstName'] . " " . $row['lastName'];

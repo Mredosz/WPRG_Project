@@ -1,50 +1,10 @@
 <?php
 session_start();
-include "../../main_website/php_file/config.php";
-global $conn;
-
-$selectCategory = "SELECT * FROM category";
-$resultCategory = mysqli_query($conn, $selectCategory);
+require_once "../../class/Database.php";
+require_once "../../class/Category.php";
 
 if (isset($_POST['submit'])) {
-//mysqli_real_escape_string() remove all special characters from string
-    // trim remove all white space front and back of string
-//Add new item to base
-    $name = trim(mysqli_real_escape_string($conn, $_POST['name']));
-    $status = trim(mysqli_real_escape_string($conn, $_POST['status']));
-    
-    //Add image
-    if (isset($_FILES['image']['name'])) {
-        $imageName = $_FILES['image']['name'];
-        if (!empty($imageName)) {
-            //extension of upload file
-            $array = explode('.', $imageName);
-            $ext = end($array);
-            
-            //Rename file 
-            $imageName = "FOOD-NAME-" . rand(0, 9999) . "." . $ext;
-            $src = $_FILES['image']['tmp_name'];
-            $path = "../../../image/food/" . $imageName;
-
-            //move upload file to new location
-            $upload = move_uploaded_file($src, $path);
-
-            if (!$upload) {
-                $error[] = "Failed to upload file";
-                header("Location: menu.php");
-                die();
-            }
-        }
-    } else {
-        $imageName = "";
-    }
-    //Add new category in to database
-    $insertCategory = "INSERT INTO category (name, statusCategory, imageName)
-    VALUES ('$name', '$status', '$imageName')";
-
-
-    mysqli_query($conn, $insertCategory);
-    mysqli_close($conn);
+Category::categoryAdd();
 //        Moves to the same page
     header("Location: category.php");
 }
@@ -112,6 +72,7 @@ require_once "navbar.php";
                 </thead>
                 <?php
                 //            mysqli_fetch_array() - associative array
+                $resultCategory = Database::query("SELECT * FROM category");
                 while ($row = mysqli_fetch_array($resultCategory)) {
                     echo "<tbody>";
                     echo "<tr>";
@@ -130,7 +91,7 @@ require_once "navbar.php";
                     echo "</tr>";
                     echo "</tbody>";
                 }
-                mysqli_close($conn);
+                Database::disconnect();
                 ?>
             </table>
         </div>

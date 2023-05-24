@@ -1,23 +1,19 @@
 <?php
 session_start();
-include "../../main_website/php_file/config.php";
-global $conn;
+require_once "../../class/Database.php";
 
 if (isset($_POST['submit'])) {
 //mysqli_real_escape_string() remove all special characters from string
     // trim remove all white space front and back of string
 //Add new item to base
-    $name = trim(mysqli_real_escape_string($conn, $_POST['name']));
-    $price = trim(mysqli_real_escape_string($conn, $_POST['price']));
-    $category = trim(mysqli_real_escape_string($conn, $_POST['category']));
-    $status = trim(mysqli_real_escape_string($conn, $_POST['status']));
+    $name = Database::realString($_POST['name']);
+    $price = Database::realString($_POST['price']);
+    $category = Database::realString($_POST['category']);
+    $status = Database::realString($_POST['status']);
 
-
-    $insertCategory = "INSERT INTO item(name, price, categoryID, status)
-    VALUES ('$name', '$price', '$category', '$status')";
-
-    mysqli_query($conn, $insertCategory);
-    mysqli_close($conn);
+    Database::query("INSERT INTO item(name, price, categoryID, status)
+    VALUES ('$name', '$price', '$category', '$status')");
+    Database::disconnect();
 //        Moves to the same page
     header("Location: menu.php");
 }
@@ -63,9 +59,8 @@ require_once "navbar.php";
                 <label for="category"><b>Category</b></label>
                 <select name="category">
                     <?php
+                    $resultCategory = Database::query("SELECT * FROM category");
                     //Show select with all cells from table
-                    $queryCategory = "SELECT * FROM category";
-                    $resultCategory = mysqli_query($conn, $queryCategory);
                     while ($row = mysqli_fetch_array($resultCategory)) {
                         $id = $row['categoryID'];
                         $name = $row['name'];
@@ -101,9 +96,8 @@ require_once "navbar.php";
                 </tr>
                 </thead>
                 <?php
-                $selectItem = "SELECT item.name, price, c.name AS category , item.status, itemID FROM item 
-                                JOIN category c on c.categoryID = item.categoryID";
-                $resultItem = mysqli_query($conn, $selectItem);
+                $resultItem = Database::query("SELECT item.name, price, c.name AS category , 
+                    item.status, itemID FROM item JOIN category c on c.categoryID = item.categoryID");
                 //            mysqli_fetch_array() - associative array
                 while ($row = mysqli_fetch_array($resultItem)) {
                     echo "<tbody>";

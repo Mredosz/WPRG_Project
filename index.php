@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['rolaID'])){
     $rolaId=$_SESSION['rolaID'];
 }else{
-    $rolaId=2;
+    $rolaId=1;
 }
 ?>
 <!DOCTYPE html>
@@ -33,12 +33,12 @@ if (isset($_SESSION['rolaID'])){
 <div data-bs-spy="scroll" data-bs-target="#navbaruser"  data-bs-smooth-scroll="true" tabindex="0">
 <!------------------------------------Navbar------------------------------------>
 <?php
-//Login users
-if ($rolaId == 1) {
-    require_once UHTML."/navbar_users.html";
 //Guests
-}else if ($rolaId == 2){
+if ($rolaId == 1) {
     require_once MHTML."/navbar.html";
+//Login users
+}else if ($rolaId == 2){
+    require_once UHTML."/navbar_users.html";
 //Admin
 }else if ($rolaId == 3){
     header("Location: src/admin_website/php_file/admin.php");

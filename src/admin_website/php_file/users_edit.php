@@ -1,6 +1,5 @@
 <?php
-include "../../../src/main_website/php_file/config.php";
-global $conn;
+require_once "../../class/Database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,16 +32,11 @@ require_once "navbar.php";
     <div class="row row-cols-2">
         <div class="col-4">
             <?php
-            global $conn;
-            if ($conn === false) {
-                $error[] = ("ERROR " . mysqli_connect_error());
-            }
             //            ID in users table
             $num = $_GET['usersID'];
-            $query = "SELECT usersID, firstName, lastName, email, password, r.name AS rola FROM users 
-            JOIN rola r on users.rolaID = r.rolaID WHERE usersID = '$num'";
 
-            $result = mysqli_query($conn, $query);
+            $result = Database::query("SELECT usersID, firstName, lastName, email, password, r.name 
+                        AS rola FROM users JOIN rola r on users.rolaID = r.rolaID WHERE usersID = '$num'");
             //            mysqli_fetch_array() - associative array
             $row = mysqli_fetch_array($result);
             ?>
@@ -64,13 +58,14 @@ require_once "navbar.php";
                 <select name="rola">
                     <?php
                     //Show select with all cells from table
-                    $queryRola = "SELECT * FROM rola";
-                    $resultRola = mysqli_query($conn, $queryRola);
+                    $resultRola = Database::query("SELECT * FROM rola");
                     while ($row2 = mysqli_fetch_array($resultRola)) {
                         $id = $row2['rolaID'];
                         $rola = $row2['name'];
                         ?>
-                        <option value="<?php echo $id; ?>"><?php echo $rola; ?> </option>
+                        <option value="<?php echo $id; ?>"
+                            <?php if($id == $row['rola']) {echo"selected";} ?>>
+                            <?php echo $rola; ?> </option>
                         <?php
                     }
                     ?>
@@ -82,24 +77,23 @@ require_once "navbar.php";
                 // trim remove all white space front and back of string
 
                 if (isset($_POST['update'])) {
-                    $firstName = trim(mysqli_escape_string($conn, $_POST['firstName']));
-                    $lastName = trim(mysqli_escape_string($conn, $_POST['lastName']));
-                    $email = trim(mysqli_escape_string($conn, $_POST['email']));
+                    $firstName = Database::realString($_POST['firstName']);
+                    $lastName = Database::realString($_POST['lastName']);
+                    $email = Database::realString($_POST['email']);
                     //if we don't change password
                     if (!empty($_POST['password'])) {
                         $password = trim(md5($_POST['password']));
-                        $sql = "UPDATE users SET firstName = ' " . $firstName . " ', lastName = ' " . $lastName . " ', 
-                    email = ' " . $email . " ', password = ' " . $password . " ', 
-                rolaID = ' " . $_POST['rola'] . "' WHERE usersID = $row[usersID]";
+                        Database::query("UPDATE users SET firstName = '$firstName', lastName = '$lastName', 
+                                        email = '$email', password = '$password',rolaID = '$_POST[rola]'
+                                        WHERE usersID = $row[usersID]");
                     } else {
                         // if we want to change password
-                        $sql = "UPDATE users SET firstName = ' " . $firstName . " ', lastName = ' " . $lastName . " ', 
-                    email = ' " . $email . " ', rolaID = ' " . $_POST['rola'] . "' WHERE usersID = $row[usersID]";
+                        Database::query("UPDATE users SET firstName = '$firstName', lastName = '$lastName', 
+                            email = '$email',rolaID = '$_POST[rola]' WHERE usersID = $row[usersID]");
                     }
-                    mysqli_query($conn, $sql);
                     //refresh website
                     header("Location: users_edit.php?usersID=$row[usersID]");
-                    mysqli_close($conn);
+                    Database::disconnect();
                 }
                 ?>
 
@@ -118,8 +112,8 @@ require_once "navbar.php";
                 </tr>
                 </thead>
                 <?php
-                $selectUsers = "SELECT usersID, firstName, lastName, email, password, r.name AS rola FROM users JOIN rola r on users.rolaID = r.rolaID";
-                $resultUsers = mysqli_query($conn, $selectUsers);
+                $resultUsers = Database::query("SELECT usersID, firstName, lastName, email, password,
+                                            r.name AS rola FROM users JOIN rola r on users.rolaID = r.rolaID");
                 //            mysqli_fetch_array() - associative array
                 while ($row = mysqli_fetch_array($resultUsers)) {
                     echo "<tbody>";

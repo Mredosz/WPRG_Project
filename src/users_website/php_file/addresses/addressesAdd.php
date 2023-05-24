@@ -1,7 +1,8 @@
 <?php
 session_start();
 // Connect to SQL
-global $resultAddresses;
+require_once "../../../class/Addresses.php";
+$usersID = $_SESSION['usersID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,10 +62,6 @@ global $resultAddresses;
             <h1 class="h1">Edit & Delete Address</h1>
         </div>
         <div class="col-4">
-            <!--            Connect to sql base address table-->
-            <?php
-            include "addressesConnect.php";
-            ?>
             <!--            Form to add new address-->
             <form method="post" action="">
                 <label for="city"><b>City</b></label>
@@ -90,35 +87,10 @@ global $resultAddresses;
         </div>
         <div class="col-8">
             <!--            Display of all addresses of a given user-->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">City</th>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Street</th>
-                    <th scope="col">Home Number</th>
-                    <th scope="col">Phone Number</th>
-                </tr>
-                </thead>
                 <?php
-                //            mysqli_fetch_array() - associative array
-                while ($row = mysqli_fetch_array($resultAddresses)) {
-                    echo "<tbody>";
-                    echo "<tr>";
-                    echo("<td>$row[city]</td>");
-                    echo("<td>$row[zipCode]</td>");
-                    echo("<td>$row[street]</td>");
-                    echo("<td>$row[homeNumber]</td>");
-                    echo("<td>$row[phoneNumber]</td>");
-//                Link to a subpage for editing a given address
-                    echo("<td><a class='btn btn-outline-dark' href=\"addressesEdit.php?addressID=$row[addressID]\">Edit</a></td>");
-//                Link to a subpage for delete a given address
-                    echo("<td><a class='btn btn-outline-dark' href=\"addressesDelete.php?addressID=$row[addressID]\">Delete</a></td>");
-                    echo "</tr>";
-                    echo "</tbody>";
-                }
+                Addresses::addressesAdd($usersID);
+                Addresses::addressesDisplay($usersID);
                 ?>
-            </table>
         </div>
     </div>
 

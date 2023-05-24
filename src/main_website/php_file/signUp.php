@@ -1,32 +1,31 @@
 <?php
 // Connect to SQL
-include "config.php";
-global $conn;
+require_once "../../class/Database.php";
 //When button sign up is clicked
 
 if (isset($_POST['submit'])) {
 //mysqli_real_escape_string() remove all special characters from string
 //md5 codding string into 32 hexadecimal number
 
-    $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
-    $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $firstName = Database::realString($_POST['firstName']);
+    $lastName = Database::realString($_POST['lastName']);
+    $email = Database::realString($_POST['email']);
     $password = md5($_POST['password']);
     $passwordRepeat = md5($_POST['passwordRepeat']);
 
-    $select = "SELECT * FROM Users WHERE email = '$email' OR(email ='$email' AND password = '$password')";
-    $result = mysqli_query($conn, $select);
+    $result = Database::query("SELECT * FROM Users WHERE email = '$email' 
+                       OR(email ='$email' AND password = '$password')");
 //When there is an account in the database with the given email and password
 //display error Account already exist
-    if (mysqli_num_rows($result) > 0) {
+    if (Database::numRows($result) > 0) {
         $error[] = "Account already exist!";
     } else {
         if ($_POST['password'] != $_POST['passwordRepeat']) {
             $error[] = "Passwords must be the same";
         } else {
 //Add new values into sql
-            $insert = "INSERT INTO Users(firstName, lastName, email, password, rolaID) VALUES ('$firstName', '$lastName', '$email', '$password', 2)";
-            mysqli_query($conn, $insert);
+            Database::query("INSERT INTO Users(firstName, lastName, email, password, rolaID) 
+                                    VALUES ('$firstName', '$lastName', '$email', '$password', 2)");
 //Send users to login page
             header("Location: login.php");
         }

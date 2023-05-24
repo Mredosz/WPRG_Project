@@ -1,9 +1,6 @@
 <?php
 session_start();
-include "../../../src/main_website/php_file/config.php";
-global $conn;
-$selectUsers = "SELECT usersID, firstName, lastName, email, password, r.name AS rola FROM users JOIN rola r on users.rolaID = r.rolaID";
-$resultUsers = mysqli_query($conn, $selectUsers);
+require_once "../../class/Database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +43,8 @@ require_once "navbar.php";
                 </tr>
                 </thead>
                 <?php
+                $resultUsers = Database::query("SELECT usersID, firstName, lastName, email, password,
+                                            r.name AS rola FROM users JOIN rola r on users.rolaID = r.rolaID");
                 //            mysqli_fetch_array() - associative array
                 while ($row = mysqli_fetch_array($resultUsers)) {
                     echo "<tbody>";

@@ -1,8 +1,7 @@
 <?php
 session_start();
-include "../../main_website/php_file/config.php";
-global $conn;
-
+require_once "../../class/Category.php";
+require_once "../../class/Database.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +36,8 @@ require_once "navbar.php";
         <div class="col-4">
             <?php
             $num = $_GET['categoryID'];
-            $selectCategory = "SELECT * FROM category WHERE categoryID ='$num'";
-
-            $resultCategory = mysqli_query($conn, $selectCategory);
             //            mysqli_fetch_array() - associative array
-            $rowCategory = mysqli_fetch_array($resultCategory);
+            $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE categoryID ='$num'"));
             ?>
             <form method="post" action="" enctype="multipart/form-data">
                 <label for="name"><b>Name</b></label>
@@ -49,7 +45,7 @@ require_once "navbar.php";
 
                 <label for="currentImage"><b>Current Photo</b></label><br>
                 <?php
-                //If column imageName in data base is empty display information "Image not found" else show image
+                //If column imageName in database is empty display information "Image not found" else show image
                 if (empty($rowCategory['imageName'])){
                     echo "Image not found<br><br>";
                 }else{
@@ -78,52 +74,7 @@ require_once "navbar.php";
             <?php
             if (isset($_POST['update'])) {
                 //mysqli_real_escape_string() remove all special characters from string
-                // trim remove all white space front and back of string
-                //Add new item to base
-                $name = trim(mysqli_real_escape_string($conn, $_POST['name']));
-                $status = trim(mysqli_real_escape_string($conn, $_POST['status']));
-                $currentImage = $rowCategory['imageName'];
-                echo $currentImage;
-
-                if (isset($_FILES['image']['name'])) {
-                    $imageName = $_FILES['image']['name'];
-                    if (!empty($imageName)) {
-                        //extension upload file
-                        $array = explode('.', $imageName);
-                        $ext = end($array);
-
-                        $imageName = trim(mysqli_real_escape_string($conn, "FOOD-NAME-" . rand(0, 9999) . "." . $ext));
-                        $src = $_FILES['image']['tmp_name'];
-                        $path = "../../../image/food/" . $imageName;
-
-                        //move upload file to new location
-                        $upload = move_uploaded_file($src, $path);
-
-                        if (!$upload) {
-                            $error[] = "Failed to upload file";
-                            header("Location: category.php");
-                            die();
-                        }
-
-                        if (!empty($currentImage)){
-                            $removePath = "../../../image/food/" . $currentImage;
-                            $remove = unlink($removePath);
-
-                            if (!$remove){
-                                $error[] = "Failed to upload file";
-                                header("Location: category.php");
-                                die();
-                            }
-                        }
-                    }
-                } else {
-                    $imageName = $currentImage;
-                }
-                $updateCategory = "UPDATE category SET name = '$name', statusCategory = '$status',
-                    imageName = '$imageName' WHERE categoryID = $rowCategory[categoryID]";
-
-                mysqli_query($conn, $updateCategory);
-
+                Category::categoryUpdate($rowCategory);
                 //refresh website
                 header("Location: categoryEdit.php?categoryID=$rowCategory[categoryID]");
             }
@@ -131,39 +82,9 @@ require_once "navbar.php";
         </div>
         <div class="col-8">
             <!--            Display information about all category -->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <?php
-                //            mysqli_fetch_array() - associative array
-                $selectCategory = "SELECT * FROM category";
-                $resultCategory = mysqli_query($conn, $selectCategory);
-                while ($row = mysqli_fetch_array($resultCategory)) {
-                    echo "<tbody>";
-                    echo "<tr>";
-                    echo("<td>$row[name]</td>");
-                    echo("<td><img src='../../../image/food/$row[imageName]' width='150px'></td>");
-                    if ($row['statusCategory'] == 1) {
-                        $status = 'Enable';
-                    } else {
-                        $status = 'Disable';
-                    }
-                    echo("<td>$status</td>");
-//                Link to a subpage for editing a given category
-                    echo("<td><a class='btn btn-outline-dark' href=\"categoryEdit.php?categoryID=$row[categoryID]\">Edit</a></td>");
-//                Link to a subpage for delete a given category
-                    echo("<td><a class='btn btn-outline-dark' href=\"categoryDelete.php?categoryID=$row[categoryID]\">Delete</a></td>");
-                    echo "</tr>";
-                    echo "</tbody>";
-                }
-                mysqli_close($conn);
-                ?>
-            </table>
+            <?php
+                Category::categoryDisplay();
+            ?>
         </div>
     </div>
 </div>
