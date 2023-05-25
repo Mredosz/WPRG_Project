@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../../class/Database.php";
+require_once "../../class/Menu.php";
 
 if (isset($_POST['submit'])) {
 //mysqli_real_escape_string() remove all special characters from string
@@ -86,40 +87,9 @@ require_once "navbar.php";
         </div>
         <div class="col-8">
             <!--            Display information about all dish -->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <?php
-                $resultItem = Database::query("SELECT item.name, price, c.name AS category , 
-                    item.status, itemID FROM item JOIN category c on c.categoryID = item.categoryID");
-                //            mysqli_fetch_array() - associative array
-                while ($row = mysqli_fetch_array($resultItem)) {
-                    echo "<tbody>";
-                    echo "<tr>";
-                    echo("<td>$row[name]</td>");
-                    echo("<td>$row[price]</td>");
-                    echo("<td>$row[category]</td>");
-                    if ($row['status'] == 1) {
-                        $status = 'Enable';
-                    } else {
-                        $status = 'Disable';
-                    }
-                    echo("<td>$status</td>");
-//                Link to a subpage for editing a given item
-                    echo("<td><a class='btn btn-outline-dark' href=\"menuEdit.php?itemID=$row[itemID]\">Edit</a></td>");
-//                Link to a subpage for delete a given item
-                    echo("<td><a class='btn btn-outline-dark' href=\"menuDelete.php?itemID=$row[itemID]\">Delete</a></td>");
-                    echo "</tr>";
-                    echo "</tbody>";
-                }
-                ?>
-            </table>
+            <?php
+            Menu::display();
+            ?>
         </div>
     </div>
 </div>
