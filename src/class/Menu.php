@@ -17,7 +17,7 @@ class Menu
                 </thead>
                 <?php
                 $resultItem = Database::query("SELECT item.name, price, c.name AS category , 
-                    item.status, itemID FROM item JOIN category c on c.categoryID = item.categoryID");
+                    item.status, itemID FROM item JOIN category c on c.categoryID = item.categoryID ORDER BY category ");
                 //            mysqli_fetch_array() - associative array
                 while ($row = mysqli_fetch_array($resultItem)) {
                     echo "<tbody>";

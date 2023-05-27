@@ -1,45 +1,40 @@
 <?php
 function menu($name)
 {
+    require_once "./src/class/Database.php";
+//            mysqli_fetch_array() - associative array
+    $result = Database::query("SELECT item.name,price, description, itemID FROM item JOIN category c on 
+                    c.categoryID = item.categoryID WHERE c.name ='$name' and status ='1'");
+//            Select from category tab
+    $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE name = '$name'"));
     ?>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-7">
             <!--            Display information about item from menu-->
             <?php
-            require_once "./src/class/Database.php";
-
-            echo "<table class=\"table\">";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th scope=\"col\">Name</th>";
-            echo "<th scope=\"col\">Price</th>";
-            //                            echo "<th scope=\"col\">Picture</th>";
-            echo "</tr>";
-            echo "</thead>";
-            //            mysqli_fetch_array() - associative array
-            $result = Database::query("SELECT item.name, price FROM item JOIN category c on 
-                    c.categoryID = item.categoryID WHERE c.name ='$name' and status ='1'");
             while ($row = mysqli_fetch_array($result)) {
-                echo "<tbody>";
-                echo "<tr>";
-                echo("<td>$row[name]</td>");
-                echo("<td>$row[price] $</td>");
-//                            echo("<td><img src='../../../image/food/$row[imageName]' width='150px'></td>");
-//                            echo("<td>$row[phoneNumber]</td>");
-                echo "</tr>";
-                echo "</tbody>";
+                ?>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h4 class="list-group-item-heading"><?php echo $row['name']; ?>
+                            <span class="badge pull-right"><?php echo $row['price'] . " $"; ?></span>
+                        </h4>
+                        <p class="list-group-item-text"><?php echo $row['description']; ?>
+                            <button class="badge pull-right add" data-id="<?php echo $row['itemID']; ?>">
+                                Add
+                            </button>
+                        </p>
+                    </li>
+                </ul>
+                <?php
             }
-
-            echo "</table>";
-            //            Select from category tab
-            $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE name = '$name'"));
             ?>
         </div>
         <div class="col-4">
             <!--            Display image and category name from database-->
             <div class="right-cover">
                 <h3><?php echo $rowCategory['name']; ?></h3>
-                <img src='../../../image/food/<?php echo $rowCategory['imageName']; ?>' class="img-fluid" ">
+                <img src='../../../image/food/<?php echo $rowCategory['imageName']; ?>' class="img-fluid"  alt="">
             </div>
         </div>
     </div>
@@ -49,44 +44,38 @@ function menu($name)
 
 function mostPopular($name)
 {
+    require_once "./src/class/Database.php";
+//            mysqli_fetch_array() - associative array
+    $result = Database::query("SELECT item.name,price, description FROM item JOIN category c on 
+                    c.categoryID = item.categoryID WHERE c.name ='$name' and status ='1'");
+//            Select from category tab
+    $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE name = '$name'"));
     ?>
     <div class="row">
-        <div class="col">
+        <div class="col-sm-7">
             <!--            Display information about item from menu-->
             <?php
-            require_once "./src/class/Database.php";
-            echo "<table class=\"table\">";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th scope=\"col\">Name</th>";
-            echo "<th scope=\"col\">Price</th>";
-            //                            echo "<th scope=\"col\">Picture</th>";
-            echo "</tr>";
-            echo "</thead>";
-            //            mysqli_fetch_array() - associative array
-            $result = Database::query("SELECT item.name, price FROM item JOIN category c on 
-                    c.categoryID = item.categoryID WHERE c.name ='$name' and status ='1'");
             while ($row = mysqli_fetch_array($result)) {
-                echo "<tbody>";
-//                echo "<tr>";
-//                echo("<td>$row[name]</td>");
-//                echo("<td>$row[price] $</td>");
-//                            echo("<td><img src='../../../image/food/$row[imageName]' width='150px'></td>");
-//                            echo("<td>$row[phoneNumber]</td>");
-//                echo "</tr>";
-                echo "</tbody>";
+                ?>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h4 class="list-group-item-heading"><?php echo $row['name']; ?>
+                            <span class="badge pull-right"><?php echo $row['price'] . " $"; ?></span>
+                        </h4>
+                        <p class="list-group-item-text"><?php echo $row['description']; ?>
+                            <button class="badge pull-right add" data-id="<?php echo $row['itemID']; ?>"></button>
+                        </p>
+                    </li>
+                </ul>
+                <?php
             }
-
-            echo "</table>";
-            //            Select from category tab
-            $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE name = '$name'"));
             ?>
         </div>
         <div class="col-4">
             <!--            Display image and category name from database-->
             <div class="right-cover">
                 <h3><?php echo $rowCategory['name']; ?></h3>
-                <img src='../../../image/food/<?php echo $rowCategory['imageName']; ?>' class="img-fluid" ">
+                <img src='../../../image/food/<?php echo $rowCategory['imageName']; ?>' class="img-fluid" alt="">
             </div>
         </div>
     </div>
@@ -150,6 +139,26 @@ function mostPopular($name)
                     }
                 }
                 ?>
+                <script>
+                    var product_id = document.getElementsByClassName("add");
+                    for (var i = 0; i < product_id.length; i++) {
+                        product_id[i].addEventListener("click",function (event) {
+
+                            var target= event.target;
+                            var id = target.getAttribute("data-id");
+                            var xml = new XMLHttpRequest();
+
+                            xml.onreadystatechange = function (){
+                                if (this.readyState == 4 && this.status == 200){
+                                    var data = JSON.parse(this.responseText);
+                                    document.getElementById("badge").innerHTML = data.num_cart+1;
+                                }
+                            }
+                            xml.open("GET", "../../../../WPRG_Project/src/main_website/php_file/addToCart.php?itemID="+id, true);
+                            xml.send();
+                        })
+                    }
+                </script>
             </div>
         </div>
     </div>
