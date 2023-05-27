@@ -587,13 +587,16 @@ p.first::first-letter {
     padding: 10px;
     text-transform: none;
 }
-#menu .nav-pills{
+
+#menu .nav-pills {
     margin-left: 30px;
 }
+
 #menu .nav-pills > li {
     background-color: #182c39;
     font-weight: 500;
 }
+
 #menu .nav-pills > li > a,
 #menu .nav-pills > li > a:focus {
     font-weight: 500;
@@ -603,10 +606,76 @@ p.first::first-letter {
     border: 1px solid #fff;
     text-transform: uppercase;
 }
+
 #menu .nav-pills > li > a:hover,
 #menu .nav-pills > li > a:focus:hover,
 #menu .nav-pills > li > a.active,
-#menu .nav-pills > li  > a.active:focus {
+#menu .nav-pills > li > a.active:focus {
     color: #fff;
     background-color: #944743;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    padding: 0;
+}
+
+h3 {
+    text-align: center;
+}
+
+.list-group-item:first-child {
+    margin-top: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/*name of dish*/
+.list-group-item h4 {
+    text-align: left;
+    color: #182c39;
+    text-transform: none;
+    font-size: 18px;
+}
+
+/*description*/
+.list-group-item p {
+    text-align: left;
+    color: #555555;
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    font-size: 14px;
+}
+
+/*price*/
+.badge {
+    border-radius: 0;
+    background-color: #444;
+    font-size: 12px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.cart {
+    margin-top: 80px;
+}
+
+.list-group-item, .category {
+    color: #555555;
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    font-size: 14px;
+}
+
+#cart p > a {
+    font-size: 14px;
 }
