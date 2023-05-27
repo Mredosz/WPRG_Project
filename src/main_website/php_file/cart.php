@@ -81,8 +81,8 @@ if ($rolaId != 1) {
         </div>
         <div class="col-4">
             <div class="text-center">
-                <h3>Total amount to paid:  <?php echo $total; ?></h3>
-                <button type="submit" class="signupbtn btn1" name="submit">Checkout</button>
+                <h3>Total amount to paid:  <?php echo $total; ?> $</h3>
+                <button type="submit" class="signupbtn btn1" href="" name="submit">Checkout</button>
             </div>
         </div>
     </div>
