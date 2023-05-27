@@ -17,7 +17,7 @@ if (isset($_SESSION['rolaID'])){
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="src/style/style.css">
     <!--    Website icon-->
-    <link rel="icon" href="/image/icon%20-%20Copy.ico">
+    <link rel="icon" href="/image/icon%20-%20Copy%20-%20Copy.ico">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <!-- Bootstrap JavaScript -->
@@ -41,7 +41,7 @@ if ($rolaId == 1) {
     require_once UHTML."/navbar_users.html";
 //Admin
 }else if ($rolaId == 3){
-    header("Location: src/admin_website/php_file/admin.php");
+    header("Location:src/admin_website/php_file/admin.php");
 }
 ?>
 <!-------------------------------------Header----------------------------------->
