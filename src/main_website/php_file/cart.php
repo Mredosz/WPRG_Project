@@ -1,6 +1,7 @@
 <?php
 require_once "../../class/Database.php";
 session_start();
+ob_start();
 if (isset($_SESSION['rolaID'])) {
     $rolaId = $_SESSION['rolaID'];
     $userID = $_SESSION['usersID'];
@@ -21,7 +22,7 @@ if (isset($_SESSION['rolaID'])) {
     <!--    Website icon-->
     <link rel="icon" href="/image/icon%20-%20Copy%20-%20Copy.ico">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.css">
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <!--    Icons-->
@@ -61,16 +62,16 @@ if ($rolaId != 1) {
                         <h4 class="list-group-item-heading"><?php echo $row['name']; ?>
                             <span class="badge pull-right"><?php echo $row['totalPrice'] . " $"; ?></span>
                             <span class="list-group-item-text category"><?php echo $row['category']; ?></span>
-                            <a href="minusCart.php?itemID=<?php echo $row["itemID"]?>" class="badge">
+                            <a href="minusCart.php?itemID=<?php echo $row["itemID"] ?>" class="badge">
                                 -
                             </a>
                             <span class="list-group-item-text text-center badge">Quantity  <?php echo $row['quantity']; ?></span>
-                            <a href="plusCart.php?itemID=<?php echo $row["itemID"]?>" class="badge">
+                            <a href="plusCart.php?itemID=<?php echo $row["itemID"] ?>" class="badge">
                                 +
                             </a>
                         </h4>
                         <p class="list-group-item-text"><?php echo $row['description']; ?>
-                        <?php echo"<a class='badge pull-right' 
+                            <?php echo "<a class='badge pull-right' 
                                 href=\"cartDelete.php?cartID=$row[cartID]\">Delete</a>"; ?>
                         </p>
                     </li>
@@ -81,16 +82,44 @@ if ($rolaId != 1) {
         </div>
         <div class="col-4">
             <div class="text-center">
-                <h3>Total amount to paid:  <?php echo $total; ?> $</h3>
-                <button type="submit" class="signupbtn btn1" href="" name="submit">Checkout</button>
+                <h3>Total amount to paid: <?php echo $total; ?> $</h3>
+                <form action="" method="post">
+                    <h5>Delivery</h5><br>
+                    <input type="radio" class="btn-check" name="delivery" id="delivery1" value="1" checked>
+                    <label class="btn btn-outline-dark" for="delivery1">Collect order</label>
+
+                    <input type="radio" class="btn-check" name="delivery" id="delivery2" value="2">
+                    <label class="btn btn-outline-dark" for="delivery2">Deliver order</label>
+
+                    <input type="radio" class="btn-check" name="delivery" id="delivery3" value="3">
+                    <label class="btn btn-outline-dark" for="delivery3">Table order</label>
+                    <button type="submit" name="submit" class="btn1">Checkout</button>
+                </form>
+                <?php
+                if (isset($_POST['submit'])) {
+                    switch ($_POST['delivery']) {
+                        case 1:
+                            header("Location: checkoutCollect.php ");
+                            break;
+                        case 2:
+                            header("Location: checkoutDeliveryPart1.php ");
+
+                            break;
+                        case 3:
+                            header("Location: checkoutTable.php ");
+
+                            break;
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
-<?php
-echo "<hr>";
+    <?php
+    echo "<hr>";
 
-Database::disconnect();
- ?>
+    Database::disconnect();
+    ?>
 </div>
 </body>
 </html>

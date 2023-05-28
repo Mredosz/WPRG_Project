@@ -15,7 +15,7 @@ $usersID = $_SESSION['usersID'];
     <!--    Website icon-->
     <link rel="icon" href="../../../../image/icon.ico">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../style/css/bootstrap.css">
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>

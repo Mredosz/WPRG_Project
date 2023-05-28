@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <!--    Website icon-->
     <link rel="icon" href="../../../image/icon.ico">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../style/css/bootstrap.css">
 </head>
 <body>
 <!--Short navbar to navigate to main website-->
