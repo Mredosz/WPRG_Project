@@ -15,7 +15,7 @@ if (isset($_SESSION['rolaID'])) {
 
     $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
                         AND email = '$email' AND rolaID = '1'";
-    $resultUser= Database::query($selectUser);
+    $resultUser = Database::query($selectUser);
     $rowUsers = mysqli_fetch_array($resultUser);
     $userID = $rowUsers['usersID'];
     $rolaId = 1;
@@ -50,6 +50,7 @@ if ($rolaId != 1) {
 } else {
     require_once "../html_file/navbarDif.html";
 }
+if ($userID != 1 && $rolaId == 2) {
 ?>
 <div class="container-fluid">
 
@@ -62,7 +63,7 @@ if ($rolaId != 1) {
         </div>
         <div class="col">
             <form action="" method="post">
-<!--                Show all information user entered to form-->
+                <!--                Show all information user entered to form-->
                 <h3>Information</h3>
                 <span class="pull-left"><b>First Name: </b><?php echo $_COOKIE['firstName']; ?></span><br>
                 <span class="pull-left"><b>Last Name: </b><?php echo $_COOKIE['lastName']; ?></span><br>
@@ -87,58 +88,147 @@ if ($rolaId != 1) {
         <div class="col">
             <!--            Show summary of order-->
             <?php
-                Checkout::display($userID);
+            Checkout::display($userID);
             ?>
         </div>
     </div>
 
-<?php
-if (isset($_POST['submit'])) {
+    <?php
+    if (isset($_POST['submit'])) {
 //    Get date from cookie
-    $firstName = $_COOKIE['firstName'];
-    $lastName = $_COOKIE['lastName'];
-    $email = $_COOKIE['email'];
-    $phoneNumber = $_COOKIE['phoneNumber'];
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
 
-    $city = $_COOKIE['city'];
-    $zipCode = $_COOKIE['zipCode'];
-    $street = $_COOKIE['street'];
-    $homeNumber = $_COOKIE['homeNumber'];
+        $city = $_COOKIE['city'];
+        $zipCode = $_COOKIE['zipCode'];
+        $street = $_COOKIE['street'];
+        $homeNumber = $_COOKIE['homeNumber'];
 
-    $payment = $_POST['payment'];
-
-//    Get userID from database
-    $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
-                        AND email = '$email' AND rolaID = '1'";
-    $resultUser= Database::query($selectUser);
-    $rowUsers = mysqli_fetch_array($resultUser);
-    $userID = $rowUsers['usersID'];
-    $_SESSION['userID'] = $userID;
+        $payment = $_POST['payment'];
 
 //    Get the last order from this user
-    $selectOrder="SELECT * FROM `order` WHERE usersID = '$rowUsers[0]' ORDER BY orderID DESC LIMIT 1";
-    $resultOrder = Database::query($selectOrder);
-    $rowOrder = mysqli_fetch_array($resultOrder);
-    $orderID = $rowOrder['orderID'];
+        $selectOrder="SELECT * FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        $resultOrder = Database::query($selectOrder);
+        $rowOrder = mysqli_fetch_array($resultOrder);
+        $orderID = $rowOrder['orderID'];
 
-    //Update payment in order table
-    $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$rowUsers[0]' ORDER BY orderID DESC LIMIT 1";
-    Database::query($updateOrder);
+        //Update payment in order table
+        $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        Database::query($updateOrder);
 
 //    Transfer of all items to another table
-    $select="SELECT * FROM cart WHERE usersID = '$userID'";
-    $result = Database::query($select);
-    while ($row = mysqli_fetch_array($result)){
-        $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
+        $select="SELECT * FROM cart WHERE usersID = '$userID'";
+        $result = Database::query($select);
+        while ($row = mysqli_fetch_array($result)){
+            $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
                             ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
-        Database::query($insertOrder);
+            Database::query($insertOrder);
 
-    }
+        }
 //    Delete items from table cart
-    $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
-    Database::query($deleteCart);
-    Checkout::bill($userID);
-    header("Location: end.php");
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
+        Checkout::bill($userID);
+        header("Location: end.php");
+    }
+    ?>
+</div>
+</body>
+</html>
+<?php
+}else{
+?>
+<div class="container-fluid">
+
+    <div class="row row-cols-2">
+        <div class="col text-center">
+            <h1 class="h1">Enter Information</h1>
+        </div>
+        <div class="col text-center">
+            <h1 class="h1">Summary</h1>
+        </div>
+        <div class="col">
+            <form action="" method="post">
+                <!--                Show all information user entered to form-->
+                <h3>Information</h3>
+                <span class="pull-left"><b>First Name: </b><?php echo $_COOKIE['firstName']; ?></span><br>
+                <span class="pull-left"><b>Last Name: </b><?php echo $_COOKIE['lastName']; ?></span><br>
+                <span class="pull-left"><b>E-mail: </b><?php echo $_COOKIE['email']; ?></span><br>
+                <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['phoneNumber']; ?></span><br>
+
+                <h3>Address</h3>
+                <span class="pull-left"><b>City: </b><?php echo $_COOKIE['city']; ?></span><br>
+                <span class="pull-left"><b>Street: </b><?php echo $_COOKIE['street']; ?></span><br>
+                <span class="pull-left"><b>Home Number: </b><?php echo $_COOKIE['homeNumber']; ?></span><br>
+                <span class="pull-left"><b>Zip Code: </b><?php echo $_COOKIE['zipCode']; ?></span><br>
+
+                <h5>Payment</h5><br>
+                <input type="radio" class="btn-check" name="payment" id="payment1" value="Card" checked>
+                <label class="btn btn-outline-dark" for="payment1">Card</label>
+
+                <input type="radio" class="btn-check" name="payment" id="payment2" value="Cash">
+                <label class="btn btn-outline-dark" for="payment2">Cash</label>
+
+                <button type="submit" name="submit" class="btn1">Checkout</button>
+        </div>
+        <div class="col">
+            <!--            Show summary of order-->
+            <?php
+            Checkout::display($userID);
+            ?>
+        </div>
+    </div>
+
+    <?php
+    if (isset($_POST['submit'])) {
+//    Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+
+        $city = $_COOKIE['city'];
+        $zipCode = $_COOKIE['zipCode'];
+        $street = $_COOKIE['street'];
+        $homeNumber = $_COOKIE['homeNumber'];
+
+        $payment = $_POST['payment'];
+
+//    Get userID from database
+        $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
+                        AND email = '$email' AND rolaID = '1'";
+        $resultUser = Database::query($selectUser);
+        $rowUsers = mysqli_fetch_array($resultUser);
+        $userID = $rowUsers['usersID'];
+        $_SESSION['userID'] = $userID;
+
+//    Get the last order from this user
+        $selectOrder = "SELECT * FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        $resultOrder = Database::query($selectOrder);
+        $rowOrder = mysqli_fetch_array($resultOrder);
+        $orderID = $rowOrder['orderID'];
+
+        //Update payment in order table
+        $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        Database::query($updateOrder);
+
+//    Transfer of all items to another table
+        $select = "SELECT * FROM cart WHERE usersID = '$userID'";
+        $result = Database::query($select);
+        while ($row = mysqli_fetch_array($result)) {
+            $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
+                            ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
+            Database::query($insertOrder);
+
+        }
+//    Delete items from table cart
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
+        Checkout::bill($userID);
+        header("Location: end.php");
+    }
 }
 ?>
 </div>

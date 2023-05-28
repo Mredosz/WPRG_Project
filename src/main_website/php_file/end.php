@@ -61,6 +61,6 @@ $path = "../../../../WPRG_Project/bills/".$rowOrder['orderID'].".txt";
         </div>
     </div>
 </div>
-<?php session_unset(); ?>
+<?php //session_unset(); ?>
 </body>
 </html>

@@ -45,7 +45,73 @@ if ($rolaId != 1) {
     <?php
     //    Checking if the user is logged in
     if ($userID != 1 && $rolaId != 1) {
+        $result= Database::query("SELECT * FROM users WHERE usersID = '$userID'");
+        $row = mysqli_fetch_array($result);
+        ?>
+ <div class="row row-cols-2">
+            <div class="col text-center">
+                <h1 class="h1">Enter Information</h1>
+            </div>
+            <div class="col text-center">
+                <h1 class="h1">Summary</h1>
+            </div>
+            <div class="col">
+                <form action="" method="post">
+                    <label for="firstName"><b>First Name</b></label>
+                    <input type="text" name="firstName" value="<?php echo $row['firstName']?>" required>
 
+                    <label for="lastName"><b>Last Name</b></label>
+                    <input type="text" name="lastName" value="<?php echo $row['lastName']?>" required>
+
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="email" name="email" value="<?php echo $row['email']?>" required>
+
+                    <label for="address"><b>Address</b></label>
+                    <select name="address" >
+                        <?php
+                        //Show select with all cells from table
+                        $resultAddress = Database::query("SELECT * FROM address WHERE usersID = '$userID'");
+                        while ($row = mysqli_fetch_array($resultAddress)) {
+                            $id = $row['addressID'];
+                            $name = $row['city']." ". $row['zipCode']." ".$row['street']." ".$row['homeNumber']." ".
+                            $row['phoneNumber'];
+                            ?>
+                            <option value="<?php echo $id; ?>"<?php if($id == $row['addressID'])
+                            {echo"selected";} ?>><?php echo $name; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+            </div>
+            <div class="col">
+                <!--            Show summary of order-->
+                <?php
+                Checkout::display($userID);
+                ?>
+</div>
+<!--            button section-->
+<div class="clearfix col-12">
+    <br>
+    <button type="reset" class="cancelbtn">Cancel</button>
+    <button type="submit" class="signupbtn" name="submit">Enter</button>
+    </form>
+</div>
+</div>
+
+<?php
+if (isset($_POST['submit'])) {
+
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+
+    setcookie('firstName', $firstName, time() + (60 * 60));
+    setcookie('lastName', $lastName, time() + (60 * 60));
+    setcookie('email', $email, time() + (60 * 60));
+    setcookie('address', $address, time() + (60 * 60));
+    header("Location: checkoutDeliveryPart2.php");
+}
     } else {
         ?>
 

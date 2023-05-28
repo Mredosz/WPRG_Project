@@ -45,115 +45,155 @@ if ($rolaId != 1) {
 ?>
 <div class="container-fluid">
     <?php
-    if ($userID != 1) {
-
-    } else {
-    ?>
-
-    <div class="row row-cols-2">
-        <div class="col text-center">
-            <h1 class="h1">Enter Information</h1>
-        </div>
-        <div class="col text-center">
-            <h1 class="h1">Summary</h1>
-        </div>
-        <div class="col">
-            <form action="" method="post">
-                <label for="city"><b>City</b></label>
-                <input type="text" name="city" placeholder="Enter your City">
-
-                <label for="zipCode"><b>Zip Code</b></label>
-                <input type="text" name="zipCode" placeholder="Enter your zip code">
-
-                <label for="street"><b>Street</b></label>
-                <input type="text" name="street" placeholder="Enter your street">
-
-                <label for="homeNumber"><b>Home Number</b></label>
-                <input type="text" name="homeNumber" placeholder="Enter your home number">
-
-                <label for="phoneNumber"><b>Phone Number</b></label>
-                <input type="tel" name="phoneNumber" placeholder="Enter your phone number">
-        </div>
-        <div class="col">
-            <!--            Show summary of order-->
-            <?php
-            $total = Checkout::display($userID);
-            }
-            ?>
-        </div>
-        <div class="clearfix col-12">
-            <br>
-            <button type="reset" class="cancelbtn">Cancel</button>
-            <button type="submit" class="signupbtn" name="submit">Enter</button>
-            </form>
-        </div>
-    </div>
-
-    <?php
-    if (isset($_POST['submit'])) {
+    if ($userID != 1 && $rolaId == 2) {
+        ?>
+        <?php
 //            Get date from cookie
         $firstName = $_COOKIE['firstName'];
         $lastName = $_COOKIE['lastName'];
         $email = $_COOKIE['email'];
-        $phoneNumber = $_POST['phoneNumber'];
+        $address = $_COOKIE['address'];
+
+        $resultAddress = Database::query("SELECT * FROM address WHERE addressID = '$address'");
+        $rowAddress = mysqli_fetch_array($resultAddress);
+
+//            Get date from database
+        $phoneNumber = $rowAddress['phoneNumber'];
+        $city = $rowAddress['city'];
+        $zipCode = $rowAddress['zipCode'];
+        $street = $rowAddress['street'];
+        $homeNumber = $rowAddress['homeNumber'];
+
+        setcookie('city', $city, time() + (60 * 60));
+        setcookie('street', $street, time() + (60 * 60));
+        setcookie('zipCode', $zipCode, time() + (60 * 60));
+        setcookie('homeNumber', $homeNumber, time() + (60 * 60));
+        setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
+
+//            add current time
+        $rand = rand(45, 80);
+        $current_time = new DateTime();
+        $date = $current_time->format('d/m/y  H:i');
+
+//            Add deliver time
+        $time = new DateTime();
+        $time->add(new DateInterval('PT' . $rand . 'M'));
+        $deliveryDate = $time->format("d/m/y  H:i");
+        $total = Checkout::display($userID);
+//                Create new field in order table
+        $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, date_order, total_price, deliverDate)
+                   VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
+        Database::query($insertOrder);
+
+        header("Location: checkoutDeliveryPart3.php");
+
+    } else {
+        ?>
+
+        <div class="row row-cols-2">
+            <div class="col text-center">
+                <h1 class="h1">Enter Information</h1>
+            </div>
+            <div class="col text-center">
+                <h1 class="h1">Summary</h1>
+            </div>
+            <div class="col">
+                <form action="" method="post">
+                    <label for="city"><b>City</b></label>
+                    <input type="text" name="city" placeholder="Enter your City">
+
+                    <label for="zipCode"><b>Zip Code</b></label>
+                    <input type="text" name="zipCode" placeholder="Enter your zip code">
+
+                    <label for="street"><b>Street</b></label>
+                    <input type="text" name="street" placeholder="Enter your street">
+
+                    <label for="homeNumber"><b>Home Number</b></label>
+                    <input type="text" name="homeNumber" placeholder="Enter your home number">
+
+                    <label for="phoneNumber"><b>Phone Number</b></label>
+                    <input type="tel" name="phoneNumber" placeholder="Enter your phone number">
+            </div>
+            <div class="col">
+                <!--            Show summary of order-->
+                <?php
+                $total = Checkout::display($userID);
+                ?>
+            </div>
+            <div class="clearfix col-12">
+                <br>
+                <button type="reset" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn" name="submit">Enter</button>
+                </form>
+            </div>
+        </div>
+
+        <?php
+        if (isset($_POST['submit'])) {
+//            Get date from cookie
+            $firstName = $_COOKIE['firstName'];
+            $lastName = $_COOKIE['lastName'];
+            $email = $_COOKIE['email'];
+            $phoneNumber = $_POST['phoneNumber'];
 
 //            Get date from form
-        $city = $_POST['city'];
-        $zipCode = $_POST['zipCode'];
-        $street = $_POST['street'];
-        $homeNumber = $_POST['homeNumber'];
+            $city = $_POST['city'];
+            $zipCode = $_POST['zipCode'];
+            $street = $_POST['street'];
+            $homeNumber = $_POST['homeNumber'];
 
 //            Checking whether the specified user is in the database
-        $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
+            $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
                         AND email = '$email' AND rolaID = '1'";
-        $resultUser = Database::query($selectUser);
+            $resultUser = Database::query($selectUser);
 //            If yes add address to user
-        if (Database::numRows($resultUser) > 0) {
+            if (Database::numRows($resultUser) > 0) {
 
-            $rowUsers = mysqli_fetch_array($resultUser);
-            $userID = $rowUsers['usersID'];
-            $selectAddress = "SELECT * FROM address WHERE usersID = '$userID' AND city = '$city' AND 
+                $rowUsers = mysqli_fetch_array($resultUser);
+                $userID = $rowUsers['usersID'];
+                $selectAddress = "SELECT * FROM address WHERE usersID = '$userID' AND city = '$city' AND 
                             zipCode = '$zipCode' AND street = '$street' AND phoneNumber = '$phoneNumber'";
-            $resultAddress = Database::query($selectAddress);
+                $resultAddress = Database::query($selectAddress);
 
 //                Checking whether a address is in the database, if so,
 //             retrieves only the address data in order not to waste space in the database.
-            if (Database::numRows($resultAddress) == 0) {
-                $newAddress = "INSERT INTO address (usersID, city, zipCode, street, homeNumber, phoneNumber) VALUES
+                if (Database::numRows($resultAddress) == 0) {
+                    $newAddress = "INSERT INTO address (usersID, city, zipCode, street, homeNumber, phoneNumber) VALUES
                                         ('$userID','$city', '$zipCode', '$street', ' $homeNumber', '$phoneNumber')";
-                Database::query($newAddress);
-            }
+                    Database::query($newAddress);
+                }
 
-            setcookie('city', $city, time() + (60 * 60));
-            setcookie('street', $street, time() + (60 * 60));
-            setcookie('zipCode', $zipCode, time() + (60 * 60));
-            setcookie('homeNumber', $homeNumber, time() + (60 * 60));
-            setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
+                setcookie('city', $city, time() + (60 * 60));
+                setcookie('street', $street, time() + (60 * 60));
+                setcookie('zipCode', $zipCode, time() + (60 * 60));
+                setcookie('homeNumber', $homeNumber, time() + (60 * 60));
+                setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
 
 //            add current time
-            $rand = rand(45,80);
-            $current_time = new DateTime();
-            $date = $current_time->format('d/m/y  H:i');
+                $rand = rand(45, 80);
+                $current_time = new DateTime();
+                $date = $current_time->format('d/m/y  H:i');
 
 //            Add deliver time
-            $time = new DateTime();
-            $time->add(new DateInterval('PT'.$rand.'M'));
-            $deliveryDate = $time->format("d/m/y  H:i");
+                $time = new DateTime();
+                $time->add(new DateInterval('PT' . $rand . 'M'));
+                $deliveryDate = $time->format("d/m/y  H:i");
 
 //                Create new field in order table
-            $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, date_order, total_price, deliverDate)
+                $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, date_order, total_price, deliverDate)
                    VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
-            Database::query($insertOrder);
+                Database::query($insertOrder);
 
 //                Update userID in cart to new userID
-            $selectCart = "SELECT * FROM cart WHERE usersID = '1'";
-            $resultCart = Database::query($selectCart);
-            while ($row = mysqli_fetch_array($resultCart)) {
-                $updateCart = "UPDATE cart SET usersID = '$userID' WHERE usersID = '1'";
-                Database::query($updateCart);
-            }
+                $selectCart = "SELECT * FROM cart WHERE usersID = '1'";
+                $resultCart = Database::query($selectCart);
+                while ($row = mysqli_fetch_array($resultCart)) {
+                    $updateCart = "UPDATE cart SET usersID = '$userID' WHERE usersID = '1'";
+                    Database::query($updateCart);
+                }
 
-            header("Location: checkoutDeliveryPart3.php");
+                header("Location: checkoutDeliveryPart3.php");
+            }
         }
     }
     ?>
