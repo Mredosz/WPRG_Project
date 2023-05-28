@@ -32,7 +32,7 @@ class Checkout
 
     static final function bill($userID)
     {
-        $result = Database::query("SELECT orderID, total_price,orderID FROM `order` 
+        $result = Database::query("SELECT orderID, totalPrice,orderID FROM `order` 
                                     WHERE usersID = '$userID' ORDER BY orderID DESC ");
         $rowOrder = mysqli_fetch_array($result);
         $orderID = $rowOrder['orderID'];
@@ -73,7 +73,7 @@ Name:                        Quantity                         Coast
         }
         $bill3 =
 "*******************************************************************************************
-Total cash to pay: $rowOrder[total_price]";
+Total cash to pay: $rowOrder[totalPrice]";
         fwrite($billFile, $bill3);
         fclose($billFile);
     }

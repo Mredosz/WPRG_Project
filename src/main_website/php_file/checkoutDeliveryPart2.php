@@ -81,7 +81,7 @@ if ($rolaId != 1) {
         $deliveryDate = $time->format("d/m/y  H:i");
         $total = Checkout::display($userID);
 //                Create new field in order table
-        $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, date_order, total_price, deliverDate)
+        $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, dateOrder, totalPrice, deliverDate)
                    VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
         Database::query($insertOrder);
 
@@ -180,7 +180,7 @@ if ($rolaId != 1) {
                 $deliveryDate = $time->format("d/m/y  H:i");
 
 //                Create new field in order table
-                $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, date_order, total_price, deliverDate)
+                $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, dateOrder, totalPrice, deliverDate)
                    VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
                 Database::query($insertOrder);
 
