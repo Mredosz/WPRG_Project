@@ -172,6 +172,7 @@ if ($userID != 1 && $rolaId == 2) {
                 <label class="btn btn-outline-dark" for="payment2">Cash</label>
 
                 <button type="submit" name="submit" class="btn1">Checkout</button>
+            </form>
         </div>
         <div class="col">
             <!--            Show summary of order-->

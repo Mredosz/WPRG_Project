@@ -121,10 +121,9 @@ if ($rolaId != 1) {
                 ?>
             </div>
             <div class="clearfix col-12">
-                <br>
-                <button type="reset" class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn" name="submit">Enter</button>
-                </form>
+                <?php
+                Checkout::checkoutButton();
+                ?>
             </div>
         </div>
 
