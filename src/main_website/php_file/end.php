@@ -40,13 +40,16 @@ if ($rolaId != 1) {
 } else {
     require_once "../html_file/navbarDif.html";
 }
+//Get information about order
 $selectOrder = "SELECT deliverDate, orderID FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
 $resultOrder = Database::query($selectOrder);
 $rowOrder = mysqli_fetch_array($resultOrder);
-//$path = "./bills/".$rowOrder['orderID'].".txt";
+
+//path to bill.txt
 $path = "../../../../WPRG_Project/bills/".$rowOrder['orderID'].".txt";
 
 ?>
+<!--show time to delivery-->
 <div class="container-fluid">
     <div class="parent">
         <div class="div1">
@@ -61,6 +64,11 @@ $path = "../../../../WPRG_Project/bills/".$rowOrder['orderID'].".txt";
         </div>
     </div>
 </div>
-<?php //session_unset(); ?>
+<?php
+if ($rolaId == 1){
+    session_unset();
+    session_destroy();
+}
+?>
 </body>
 </html>
