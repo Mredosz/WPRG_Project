@@ -46,8 +46,8 @@ function mostPopular($name)
 {
     require_once "./src/class/Database.php";
 //            mysqli_fetch_array() - associative array
-    $result = Database::query("SELECT item.name,price, description FROM item JOIN category c on 
-                    c.categoryID = item.categoryID WHERE c.name ='$name' and status ='1'");
+    $result = Database::query("SELECT *, COUNT(*) AS totalCount FROM order_position 
+    JOIN item i on order_position.itemID = i.itemID GROUP BY order_position.itemID ORDER BY totalCount DESC LIMIT 6");
 //            Select from category tab
     $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE name = '$name'"));
     ?>
@@ -63,7 +63,9 @@ function mostPopular($name)
                             <span class="badge pull-right"><?php echo $row['price'] . " $"; ?></span>
                         </h4>
                         <p class="list-group-item-text"><?php echo $row['description']; ?>
-                            <button class="badge pull-right add" data-id="<?php echo $row['itemID']; ?>"></button>
+                            <button class="badge pull-right add" data-id="<?php echo $row['itemID']; ?>">
+                                Add
+                            </button>
                         </p>
                     </li>
                 </ul>
