@@ -152,8 +152,7 @@ function mostPopular($name)
 
                             xml.onreadystatechange = function (){
                                 if (this.readyState == 4 && this.status == 200){
-                                    var data = JSON.parse(this.responseText);
-                                    document.getElementById("badge").innerHTML = data.num_cart+1;
+                                    alert("Add to cart");
                                 }
                             }
                             xml.open("GET", "../../../../WPRG_Project/src/main_website/php_file/addToCart.php?itemID="+id, true);

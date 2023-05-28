@@ -29,7 +29,6 @@ if (isset($_GET['itemID'])){
         $row = mysqli_fetch_array($result);
         $cost = $row['price']*$quantity;
 
-        echo json_encode(["num_cart"=>$count]);
 
         Database::query("UPDATE cart SET quantity = '$quantity', totalPrice = '$cost' 
             WHERE itemID='$itemID' AND usersID ='$userID'");
@@ -38,7 +37,6 @@ if (isset($_GET['itemID'])){
         while ($row = mysqli_fetch_array($result)) {
             Database::query("INSERT INTO cart (itemID, quantity, totalPrice, usersID) VALUES 
                                                     ('$row[itemID]', '1', '$row[price]','$userID' )");
-                echo json_encode(["num_cart"=>$count]);
         }
     }
 }

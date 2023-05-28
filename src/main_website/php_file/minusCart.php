@@ -15,8 +15,11 @@ if (isset($_GET['itemID'])) {
     $quantity = $rowCart['quantity']-1;
     $cost = $row['price']*$quantity;
 }
-
-Database::query("UPDATE cart SET quantity = '$quantity', totalPrice = '$cost' WHERE itemID='$itemID'");
+if ($quantity>0){
+    Database::query("UPDATE cart SET quantity = '$quantity', totalPrice = '$cost' WHERE itemID='$itemID'");
+}else{
+    Database::query("DELETE FROM cart WHERE itemID = '$itemID'");
+}
 
 Database::disconnect();
 header("Location: cart.php");
