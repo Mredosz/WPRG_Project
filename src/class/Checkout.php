@@ -331,13 +331,14 @@ Total cash to pay: $rowOrder[totalPrice]";
         }
 
 //    Delete items from table cart
-        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
-        Database::query($deleteCart);
+
         $_SESSION['payment'] = $payment;
         if ($payment == 'Card') {
             header("Location: checkoutTablePart3.php");
         } else {
             unset($_SESSION['payment']);
+            $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+            Database::query($deleteCart);
             header("Location: end.php");
         }
     }

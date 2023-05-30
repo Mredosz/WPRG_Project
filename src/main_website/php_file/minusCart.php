@@ -5,7 +5,11 @@ require_once "../../../src/class/Database.php";
 
 if (isset($_GET['itemID'])) {
     $itemID = $_GET['itemID'];
-    $userID = $_SESSION['usersID'];
+    if (isset($_SESSION['usersID'])){
+        $userID = $_SESSION['usersID'];
+    }else{
+        $userID = 1;
+    }
 
     $result = Database::query("SELECT * FROM item WHERE itemID ='$itemID'");
     $resultCart = Database::query("SELECT * FROM cart WHERE itemID = '$itemID' AND usersID ='$userID'");
