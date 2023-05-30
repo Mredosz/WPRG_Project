@@ -56,7 +56,9 @@ require_once "../html_file/navbar_users.html";
         </div>
         <div class="col">
             <?php
-            Orders::displayYourAddress($row);
+            if ($row['deliver'] == 'Deliver') {
+                Orders::displayYourAddress($row);
+            }
             ?>
         </div>
         <div class="col col-12">

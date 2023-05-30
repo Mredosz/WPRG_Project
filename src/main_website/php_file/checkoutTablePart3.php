@@ -69,12 +69,7 @@ if ($userID != 1 && $rolaId == 2) {
                 <span class="pull-left"><b>Last Name: </b><?php echo $_COOKIE['lastName']; ?></span><br>
                 <span class="pull-left"><b>E-mail: </b><?php echo $_COOKIE['email']; ?></span><br>
                 <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['phoneNumber']; ?></span><br>
-
-                <h3>Address</h3>
-                <span class="pull-left"><b>City: </b><?php echo $_COOKIE['city']; ?></span><br>
-                <span class="pull-left"><b>Street: </b><?php echo $_COOKIE['street']; ?></span><br>
-                <span class="pull-left"><b>Home Number: </b><?php echo $_COOKIE['homeNumber']; ?></span><br>
-                <span class="pull-left"><b>Zip Code: </b><?php echo $_COOKIE['zipCode']; ?></span><br>
+                <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['tableNumber']; ?></span><br>
 
                 <h5>Payment</h5><br>
                 <input type="radio" class="btn-check" name="payment" id="payment1" value="Card" checked>
@@ -96,7 +91,7 @@ if ($userID != 1 && $rolaId == 2) {
     <?php
     if (isset($_POST['submit'])) {
         Checkout::checkoutPar3();
-        Checkout::billDelivery($userID);
+        Checkout::billTable($userID);
         header("Location: end.php");
     }
     ?>
@@ -123,12 +118,7 @@ if ($userID != 1 && $rolaId == 2) {
                 <span class="pull-left"><b>Last Name: </b><?php echo $_COOKIE['lastName']; ?></span><br>
                 <span class="pull-left"><b>E-mail: </b><?php echo $_COOKIE['email']; ?></span><br>
                 <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['phoneNumber']; ?></span><br>
-
-                <h3>Address</h3>
-                <span class="pull-left"><b>City: </b><?php echo $_COOKIE['city']; ?></span><br>
-                <span class="pull-left"><b>Street: </b><?php echo $_COOKIE['street']; ?></span><br>
-                <span class="pull-left"><b>Home Number: </b><?php echo $_COOKIE['homeNumber']; ?></span><br>
-                <span class="pull-left"><b>Zip Code: </b><?php echo $_COOKIE['zipCode']; ?></span><br>
+                <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['tableNumber']; ?></span><br>
 
                 <h5>Payment</h5><br>
                 <input type="radio" class="btn-check" name="payment" id="payment1" value="Card" checked>
@@ -151,11 +141,11 @@ if ($userID != 1 && $rolaId == 2) {
     <?php
     if (isset($_POST['submit'])) {
         Checkout::checkoutPar3();
-        Checkout::billDelivery($userID);
+        Checkout::billTable($userID);
         header("Location: end.php");
     }
-}
-?>
+    }
+    ?>
 </div>
 </body>
 </html>

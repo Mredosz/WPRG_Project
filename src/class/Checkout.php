@@ -27,10 +27,21 @@ class Checkout
         <!--                Show total cash to pay-->
         <h3>Total amount to paid: <?php echo $total; ?> $</h3>
         <?php
+    }
+
+    static final function total($userID){
+        $selectSummary = "SELECT quantity, totalPrice,i.name AS name FROM cart
+                JOIN item i on i.itemID = cart.itemID
+                JOIN users u on u.usersID = cart.usersID WHERE u.usersID ='$userID'";
+        $resultSummary = Database::query($selectSummary);
+        $total = 0;
+        while ($row = mysqli_fetch_array($resultSummary)) {
+            $total += $row['totalPrice'];
+        }
         return $total;
     }
 
-    static final function bill($userID)
+    static final function billDelivery($userID)
     {
         $result = Database::query("SELECT orderID, totalPrice,orderID FROM `order` 
                                     WHERE usersID = '$userID' ORDER BY orderID DESC ");
@@ -78,6 +89,95 @@ Total cash to pay: $rowOrder[totalPrice]";
         fclose($billFile);
     }
 
+    static final function billCollect($userID)
+    {
+        $result = Database::query("SELECT orderID, totalPrice,orderID FROM `order` 
+                                    WHERE usersID = '$userID' ORDER BY orderID DESC ");
+        $rowOrder = mysqli_fetch_array($result);
+        $orderID = $rowOrder['orderID'];
+        $resultOrderItem = Database::query("SELECT name, quantity, total FROM order_position 
+         JOIN item i on i.itemID = order_position.itemID WHERE orderID = '$orderID'");
+        //    Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+
+        $bill =
+            "*******************************************************************************************
+Your Details:                                                          
+Name: $firstName                                       
+Last Name: $lastName                                   
+E-mail: $email                          
+Phone Number: $phoneNumber
+*******************************************************************************************
+
+Order Information:
+Name:                        Quantity                         Coast
+-------------------------------------------------------------------------------------------
+";
+        $path = "C:\\PJWSTK\\WPRG\\Git\\WPRG_Project\\bills\\".$rowOrder['orderID'].".txt";
+        $billFile = fopen("$path", "w") or die("Unable to open file!");
+        fwrite($billFile, $bill);
+        while ($row = mysqli_fetch_array($resultOrderItem)){
+            $bill2=
+                "$row[name]                           $row[quantity]                                $row[total]
+-------------------------------------------------------------------------------------------
+";
+            fwrite($billFile, $bill2);
+        }
+        $bill3 =
+            "*******************************************************************************************
+Total cash to pay: $rowOrder[totalPrice]";
+        fwrite($billFile, $bill3);
+        fclose($billFile);
+    }
+
+    static final function billTable($userID)
+    {
+        $result = Database::query("SELECT orderID, totalPrice,orderID FROM `order` 
+                                    WHERE usersID = '$userID' ORDER BY orderID DESC ");
+        $rowOrder = mysqli_fetch_array($result);
+        $orderID = $rowOrder['orderID'];
+        $resultOrderItem = Database::query("SELECT name, quantity, total FROM order_position 
+         JOIN item i on i.itemID = order_position.itemID WHERE orderID = '$orderID'");
+        //    Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+        $tableNumber = $_COOKIE['tableNumber'];
+
+        $bill =
+            "*******************************************************************************************
+Your Details:                                                      Table Number : $tableNumber    
+Name: $firstName                                       
+Last Name: $lastName                                   
+E-mail: $email                           
+Phone Number: $phoneNumber
+*******************************************************************************************
+
+Order Information:
+Name:                        Quantity                         Coast
+-------------------------------------------------------------------------------------------
+";
+        $path = "C:\\PJWSTK\\WPRG\\Git\\WPRG_Project\\bills\\".$rowOrder['orderID'].".txt";
+        $billFile = fopen("$path", "w") or die("Unable to open file!");
+        fwrite($billFile, $bill);
+        while ($row = mysqli_fetch_array($resultOrderItem)){
+            $bill2=
+                "$row[name]                           $row[quantity]                                $row[total]
+-------------------------------------------------------------------------------------------
+";
+            fwrite($billFile, $bill2);
+        }
+        $bill3 =
+            "*******************************************************************************************
+Total cash to pay: $rowOrder[totalPrice]";
+        fwrite($billFile, $bill3);
+        fclose($billFile);
+    }
+
     static final function checkoutPart1(){
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -104,12 +204,12 @@ Total cash to pay: $rowOrder[totalPrice]";
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
-        $address = $_POST['address'];
+
 
         setcookie('firstName', $firstName, time() + (60 * 60));
         setcookie('lastName', $lastName, time() + (60 * 60));
         setcookie('email', $email, time() + (60 * 60));
-        setcookie('address', $address, time() + (60 * 60));
+
     }
 
     static final function checkoutPart1Form(){
@@ -125,7 +225,7 @@ Total cash to pay: $rowOrder[totalPrice]";
 <?php
     }
 
-    static final function checkoutPart1formLogin(){
+    static final function checkoutPart1formLogin($row, $userID){
         ?>
     }
          <label for="firstName"><b>First Name</b></label>
@@ -166,6 +266,65 @@ Total cash to pay: $rowOrder[totalPrice]";
             </form>
         </div>
 <?php
+    }
+
+    static final function checkoutPart2Time($userID, $type){
+
+//            add current time
+        $rand = rand(45, 80);
+        $current_time = new DateTime();
+        $date = $current_time->format('d/m/y  H:i');
+
+//            Add deliver time
+        $time = new DateTime();
+        $time->add(new DateInterval('PT' . $rand . 'M'));
+        $deliveryDate = $time->format("d/m/y  H:i");
+        $total = Checkout::total($userID);
+//                Create new field in order table
+        $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, dateOrder, totalPrice, deliverDate)
+                   VALUES ('$userID', '$type', 'Cash', '$date', '$total',' $deliveryDate' ) ";
+        Database::query($insertOrder);
+    }
+
+    static final function checkoutPar3(){
+//        Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+
+        $payment = $_POST['payment'];
+
+//    Get userID from database
+        $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
+                        AND email = '$email' AND rolaID = '1'";
+        $resultUser = Database::query($selectUser);
+        $rowUsers = mysqli_fetch_array($resultUser);
+        $userID = $rowUsers['usersID'];
+        $_SESSION['userID'] = $userID;
+
+//    Get the last order from this user
+        $selectOrder = "SELECT * FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        $resultOrder = Database::query($selectOrder);
+        $rowOrder = mysqli_fetch_array($resultOrder);
+        $orderID = $rowOrder['orderID'];
+
+        //Update payment in order table
+        $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        Database::query($updateOrder);
+
+//    Transfer of all items to another table
+        $select = "SELECT * FROM cart WHERE usersID = '$userID'";
+        $result = Database::query($select);
+        while ($row = mysqli_fetch_array($result)) {
+            $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
+                            ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
+            Database::query($insertOrder);
+
+        }
+//    Delete items from table cart
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
     }
 
 }

@@ -57,9 +57,42 @@ if ($rolaId != 1) {
             </div>
             <div class="col">
                 <form action="" method="post">
-                    <?php
-                    Checkout::checkoutPart1formLogin($row, $userID);
-                    ?>
+                    <label for="firstName"><b>First Name</b></label>
+                    <input type="text" name="firstName" value="<?php echo $row['firstName'] ?>" required>
+
+                    <label for="lastName"><b>Last Name</b></label>
+                    <input type="text" name="lastName" value="<?php echo $row['lastName'] ?>" required>
+
+                    <label for="email"><b>E-mail</b></label>
+                    <input type="email" name="email" value="<?php echo $row['email'] ?>" required>
+
+                    <label for="phoneNumber"><b>Phone Number</b></label>
+                    <select name="phoneNumber">
+                        <?php
+                        //Show select with all cells from table
+                        $resultAddress = Database::query("SELECT * FROM address WHERE usersID = '$userID'");
+                        while ($row = mysqli_fetch_array($resultAddress)) {
+                            $id = $row['addressID'];
+                            $name = $row['phoneNumber'];
+                            ?>
+                            <option value="<?php echo $id; ?>"<?php if ($id == $row['addressID']) {
+                                echo "selected";
+                            } ?>><?php echo $name; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <label for="tableNumber"><b>Table Number</b></label>
+                    <select name="tableNumber">
+                        <?php
+                        for ($i = 0; $i <= 20; $i++) {
+                            $name = "Table: ".($i+1);
+                            ?>
+                            <option value="<?php echo ($i+1); ?>"><?php echo $name; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
             </div>
             <div class="col">
                 <!--            Show summary of order-->
@@ -77,11 +110,11 @@ if ($rolaId != 1) {
 
         <?php
         if (isset($_POST['submit'])) {
+            $phoneNumber = $_POST['phoneNumber'];
+            setcookie('address', $phoneNumber, time() + (60 * 60));
             Checkout::checkoutPart1Login();
-            $address = $_POST['address'];
-            setcookie('address', $address, time() + (60 * 60));
 
-            header("Location: checkoutDeliveryPart2.php");
+            header("Location: checkoutTablePart2.php");
         }
     } else {
         ?>
@@ -98,6 +131,21 @@ if ($rolaId != 1) {
                     <?php
                     Checkout::checkoutPart1Form();
                     ?>
+
+                    <label for="phoneNumber"><b>Phone Number</b></label>
+                    <input type="tel" name="phoneNumber" placeholder="Enter Your Phone Number" required>
+
+                    <label for="tableNumber"><b>Table Number</b></label>
+                    <select name="tableNumber">
+                        <?php
+                        for ($i = 0; $i <= 20; $i++) {
+                            $name = "Table: ".($i+1);
+                            ?>
+                            <option value="<?php echo ($i+1); ?>"><?php echo $name; ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
             </div>
             <div class="col">
                 <!--            Show summary of order-->
@@ -113,9 +161,15 @@ if ($rolaId != 1) {
 
         <?php
         if (isset($_POST['submit'])) {
+            $phoneNumber = $_POST['phoneNumber'];
+            $tableNumber = $_POST['tableNumber'];
+
+            setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
+            setcookie('tableNumber', $tableNumber, time() + (60 * 60));
+
             Checkout::checkoutPart1();
 
-            header("Location: checkoutDeliveryPart2.php");
+            header("Location: checkoutTablePart2.php");
         }
     }
     ?>

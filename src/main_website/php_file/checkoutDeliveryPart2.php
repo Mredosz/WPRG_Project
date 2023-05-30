@@ -70,20 +70,7 @@ if ($rolaId != 1) {
         setcookie('homeNumber', $homeNumber, time() + (60 * 60));
         setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
 
-//            add current time
-        $rand = rand(45, 80);
-        $current_time = new DateTime();
-        $date = $current_time->format('d/m/y  H:i');
-
-//            Add deliver time
-        $time = new DateTime();
-        $time->add(new DateInterval('PT' . $rand . 'M'));
-        $deliveryDate = $time->format("d/m/y  H:i");
-        $total = Checkout::display($userID);
-//                Create new field in order table
-        $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, dateOrder, totalPrice, deliverDate)
-                   VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
-        Database::query($insertOrder);
+     Checkout::checkoutPart2Time($userID, "Deliver");
 
         header("Location: checkoutDeliveryPart3.php");
 
@@ -117,7 +104,8 @@ if ($rolaId != 1) {
             <div class="col">
                 <!--            Show summary of order-->
                 <?php
-                $total = Checkout::display($userID);
+                Checkout::display($userID);
+                $total = Checkout::total($userID);
                 ?>
             </div>
             <div class="clearfix col-12">
@@ -168,21 +156,6 @@ if ($rolaId != 1) {
                 setcookie('homeNumber', $homeNumber, time() + (60 * 60));
                 setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
 
-//            add current time
-                $rand = rand(45, 80);
-                $current_time = new DateTime();
-                $date = $current_time->format('d/m/y  H:i');
-
-//            Add deliver time
-                $time = new DateTime();
-                $time->add(new DateInterval('PT' . $rand . 'M'));
-                $deliveryDate = $time->format("d/m/y  H:i");
-
-//                Create new field in order table
-                $insertOrder = "INSERT INTO `order` (usersID, deliver, payment, dateOrder, totalPrice, deliverDate)
-                   VALUES ('$userID', 'Deliver', 'Cash', '$date', '$total',' $deliveryDate' ) ";
-                Database::query($insertOrder);
-
 //                Update userID in cart to new userID
                 $selectCart = "SELECT * FROM cart WHERE usersID = '1'";
                 $resultCart = Database::query($selectCart);
@@ -190,6 +163,8 @@ if ($rolaId != 1) {
                     $updateCart = "UPDATE cart SET usersID = '$userID' WHERE usersID = '1'";
                     Database::query($updateCart);
                 }
+
+              Checkout::checkoutPart2Time($userID, "Deliver");
 
                 header("Location: checkoutDeliveryPart3.php");
             }

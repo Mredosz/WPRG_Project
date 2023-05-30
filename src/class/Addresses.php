@@ -60,9 +60,9 @@ class Addresses
    static final function addressesUpdate($row, $usersID){
        // trim remove all white space front and back of string
        if (isset($_POST['update'])) {
-           Database::query("UPDATE address SET city = 'trim($_POST[city])', zipCode = 
-                    'trim($_POST[zipCode])', street = 'trim($_POST[street])', homeNumber =
-                     'trim($_POST[homeNumber])', phoneNumber = 'trim($_POST[phoneNumber])' 
+           Database::query("UPDATE address SET city = '$_POST[city]', zipCode = 
+                    '$_POST[zipCode]', street = '$_POST[street]', homeNumber =
+                     '$_POST[homeNumber]', phoneNumber = '$_POST[phoneNumber]' 
                      WHERE addressID = $_GET[addressID] AND usersID = $usersID");
            header("Location:addressesEdit.php?addressID=$row[addressID]");
            Database::disconnect();
