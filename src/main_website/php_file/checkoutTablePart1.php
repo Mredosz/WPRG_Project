@@ -111,7 +111,11 @@ if ($rolaId != 1) {
         <?php
         if (isset($_POST['submit'])) {
             $phoneNumber = $_POST['phoneNumber'];
-            setcookie('address', $phoneNumber, time() + (60 * 60));
+            $tableNumber = $_POST['tableNumber'];
+
+            setcookie('phoneNumber', $phoneNumber, time() + (60 * 60));
+            setcookie('tableNumber', $tableNumber, time() + (60 * 60));
+
             Checkout::checkoutPart1Login();
 
             header("Location: checkoutTablePart2.php");

@@ -20,6 +20,9 @@ if (isset($_SESSION['rolaID'])) {
     $userID = $rowUsers['usersID'];
     $rolaId = 1;
 }
+if (!isset($_SESSION['payment'])){
+    $_SESSION['payment'] = "Cash";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,12 +79,10 @@ if ($userID != 1 && $rolaId == 2) {
                 <span class="pull-left"><b>Home Number: </b><?php echo $_COOKIE['homeNumber']; ?></span><br>
                 <span class="pull-left"><b>Zip Code: </b><?php echo $_COOKIE['zipCode']; ?></span><br>
 
-                <h5>Payment</h5><br>
-                <input type="radio" class="btn-check" name="payment" id="payment1" value="Card" checked>
-                <label class="btn btn-outline-dark" for="payment1">Card</label>
-
-                <input type="radio" class="btn-check" name="payment" id="payment2" value="Cash">
-                <label class="btn btn-outline-dark" for="payment2">Cash</label>
+                <?php
+                Checkout::checkoutPar3CardPay();
+                unset($_SESSION['payment']);
+                ?>
 
                 <button type="submit" name="submit" class="btn1">Checkout</button>
         </div>
@@ -97,7 +98,6 @@ if ($userID != 1 && $rolaId == 2) {
     if (isset($_POST['submit'])) {
         Checkout::checkoutPar3();
         Checkout::billDelivery($userID);
-        header("Location: end.php");
     }
     ?>
 </div>
@@ -130,12 +130,10 @@ if ($userID != 1 && $rolaId == 2) {
                 <span class="pull-left"><b>Home Number: </b><?php echo $_COOKIE['homeNumber']; ?></span><br>
                 <span class="pull-left"><b>Zip Code: </b><?php echo $_COOKIE['zipCode']; ?></span><br>
 
-                <h5>Payment</h5><br>
-                <input type="radio" class="btn-check" name="payment" id="payment1" value="Card" checked>
-                <label class="btn btn-outline-dark" for="payment1">Card</label>
-
-                <input type="radio" class="btn-check" name="payment" id="payment2" value="Cash">
-                <label class="btn btn-outline-dark" for="payment2">Cash</label>
+                <?php
+                Checkout::checkoutPar3CardPay();
+                unset($_SESSION['payment']);
+                ?>
 
                 <button type="submit" name="submit" class="btn1">Checkout</button>
             </form>
@@ -152,7 +150,6 @@ if ($userID != 1 && $rolaId == 2) {
     if (isset($_POST['submit'])) {
         Checkout::checkoutPar3();
         Checkout::billDelivery($userID);
-        header("Location: end.php");
     }
 }
 ?>
