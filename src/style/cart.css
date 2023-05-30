@@ -63,3 +63,76 @@ input:focus {
     border: 1px solid #ffc266;
     border-radius: 15px;
 }
+
+#navbaruser .nav-pills li a,
+#navbaruser .nav-pills li a:focus {
+    font-weight: 500;
+    font-size: 15px;
+    color: #fff;
+    border-radius: 0;
+
+
+}
+
+#navbaruser .nav-pills li a:hover,
+#navbaruser .nav-pills li a:focus:hover {
+    color: #ffc266;
+    background-color: #212529;
+    transition: color 1s;
+}
+
+#navbaruser .nav-pills li a.active,
+#navbaruser .nav-pills li a.active:focus {
+    background-color: #212529;
+    color: #ffc266;
+}
+
+
+.navbar {
+    background-color: #182c39;
+    border-color: rgb(51, 17, 0);
+    border-color: rgba(51, 17, 0, 0.2);
+    font-weight: 700;
+    padding: 15px 0;
+    transition: padding .5s;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 25px;
+    padding-left: 15px;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #ffc266;
+    transition: color 1s;
+}
+
+.navbar .navbar-nav {
+    padding-right: 50px;
+}
+
+.navbar .nav-pills > li > a {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    margin: auto 5px;
+    text-shadow: #222 0.3em 0.3em 0.3em;
+}
+
+.navbar .nav-pills > li > a:hover,
+.navbar .nav-pills > li > a:focus:hover {
+    color: #ffc266;
+    transition: color 1s;
+}
+
+
+.navbar .nav-pills > li.active > a:hover,
+.navbar .nav-pills > li.active > a:focus:hover {
+    background-color: transparent;
+}

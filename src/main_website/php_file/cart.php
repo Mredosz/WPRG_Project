@@ -99,14 +99,14 @@ if ($rolaId != 1) {
                 if (isset($_POST['submit'])) {
                     switch ($_POST['delivery']) {
                         case 1:
-                            header("Location: checkoutCollect.php ");
+                            header("Location: checkoutCollectPart1.php ");
                             break;
                         case 2:
                             header("Location: checkoutDeliveryPart1.php ");
 
                             break;
                         case 3:
-                            header("Location: checkoutTable.php ");
+                            header("Location: checkoutTablePart1.php ");
 
                             break;
                     }
