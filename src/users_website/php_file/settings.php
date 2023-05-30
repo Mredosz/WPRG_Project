@@ -76,29 +76,10 @@ if (isset($_POST['submitPassword'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<nav class="navbar bg-dark navbar-dark px-3 mb-3">
-    <a class="navbar-brand" href="../../../../WPRG_Project/index.php">Shrek's Restaurant</a>
-    <h1 class="h">Settings</h1>
-    <ul class="nav nav-pills ms-auto flex-nowrap">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- Show First name and Last name user-->
-                <?php echo $_SESSION['userName'] ?>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark bg-dark">
-                <li><a class="dropdown-item" href="orders.php">Orders</a></li>
-                <li><a class="dropdown-item" href="addresses/addressesAdd.php">Addresses</a></li>
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-                <li>
-                    <hr class="dropdown-divider bg-secondary">
-                </li>
-                <li><a class="dropdown-item"
-                       href="../../../src/users_website/php_file/logout.php">Log out</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-<div class="container-fluid">
+<?php
+require_once "../html_file/navbar_users.html";
+?>
+<div class="container-fluid" style="margin-top: 80px">
     <div class="row">
         <!--    Display errors-->
         <?php

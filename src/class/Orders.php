@@ -6,7 +6,7 @@ class Orders
     {
 
         ?>
-        <br><br> <h3>Your order</h3>
+        <br><br><span> <h3>Your order</h3></span>
         <table class="table">
             <thead>
             <tr>
@@ -44,15 +44,15 @@ class Orders
         $resultOrders = Database::query("SELECT * FROM `order` WHERE usersID = '$usersID' 
                             AND orderID = '$num'");
         $row = mysqli_fetch_array($resultOrders);
-        echo "<b>Order Date: </b>$row[dateOrder]<br>";
-        echo "<b>Payment: </b>$row[payment]<br>";
-        echo "<b>Deliver Type: </b>$row[deliver]<br>";
+        echo "<span><b>Order Date: </b>$row[dateOrder]</span><br>";
+        echo "<span><b>Payment: </b>$row[payment]</span><br>";
+        echo "<span><b>Deliver Type: </b>$row[deliver]</span><br>";
 
         if ($row['deliver'] == 'Table') {
-            echo "<b>Table Number: </b> $row[tableNumber]<br>";
+            echo "<span><b>Table Number: </b> $row[tableNumber]</span><br>";
         }
 
-        echo "<b>Total Price: </b>$row[totalPrice]<br><br>";
+        echo "<span><b>Total Price: </b>$row[totalPrice]</span><br><br>";
 
         $path = "../../../../WPRG_Project/bills/" . $row['orderID'] . ".txt";
         ?>
@@ -66,21 +66,21 @@ class Orders
     static final function displayYourInformation($row)
     {
 //        Show information about user
-        echo "<h3 class=''> Your Information </h3>";
-        echo "<b>Name: </b>$row[firstName]<br>";
-        echo "<b>Last Name: </b>$row[lastName]<br>";
-        echo "<b>Email: </b> $row[email]<br>";
-        echo "<b>Phone Number: </b>$row[phoneNumber]<br>";
+        echo "<span><h3 class=''> Your Information </h3></span>";
+        echo "<span><b>Name: </b>$row[firstName]</span><br>";
+        echo "<span><b>Last Name: </b>$row[lastName]</span><br>";
+        echo "<span><b>Email: </b> $row[email]</span><br>";
+        echo "<span><b>Phone Number: </b>$row[phoneNumber]</span><br>";
     }
 
     static final function displayYourAddress($row)
     {
 //        show information about user address
-        echo "<h3 class=''> Your Address </h3>";
-        echo "<b>City: </b>$row[city]<br>";
-        echo "<b>Zip Code: </b>$row[zipCode]<br>";
-        echo "<b>Street: </b>$row[street]<br>";
-        echo "<b>Home number: </b> $row[homeNumber]<br>";
+        echo "<span><h3 class=''> Your Address </h3></span>";
+        echo "<span><b>City: </b>$row[city]</span><br>";
+        echo "<span><b>Zip Code: </b>$row[zipCode]</span><br>";
+        echo "<span><b>Street: </b>$row[street]</span><br>";
+        echo "<span><b>Home number: </b> $row[homeNumber]</span><br>";
     }
 
     static final function displayOrder($resultOrders)

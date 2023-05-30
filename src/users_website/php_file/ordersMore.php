@@ -13,7 +13,7 @@ $usersID = $_SESSION['usersID'];
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../src/style/cart.css">
-<!--    <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">-->
+    <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
     <!--    Website icon-->
     <link rel="icon" href="../../../image/icon.ico">
     <!-- Bootstrap CSS -->
@@ -37,7 +37,7 @@ require_once "../html_file/navbar_users.html";
     ?>
     <div class="row">
         <div class="col col-12 text-center" style="margin-top: 70px">
-            <h1 class="h1">Your previous orders </h1>
+            <span> <h1 class="h1">Your previous orders </h1></span>
         </div>
         <div class="col">
                 <?php

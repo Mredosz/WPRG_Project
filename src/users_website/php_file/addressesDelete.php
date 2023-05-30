@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Connect to SQL
-require_once "../../../class/Database.php";
+require_once "../../class/Database.php";
 //Move user to subpage
 header("Location:addressesAdd.php");
 

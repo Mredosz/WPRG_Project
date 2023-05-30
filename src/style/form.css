@@ -15,12 +15,12 @@ label, p {
     font-size: 20px;
 }
 
-label, .h, p, td, th, .hlog {
+label, .h, p, td, th, .hlog, span {
     color: white;
 
 }
 
-label:hover, .h:hover, p:hover, td:hover, th:hover, .hlog:hover {
+label:hover, .h:hover, p:hover, td:hover, th:hover, .hlog:hover, span:hover {
     transition: color 1s;
     color: #ffc266;
 }
@@ -37,7 +37,7 @@ label:hover, .h:hover, p:hover, td:hover, th:hover, .hlog:hover {
 }
 
 body {
-    background-image: url("../../image/background.jpg");
+    background-image: url("../../image/background - Copy.jpg");
     margin-bottom: 0;
     /*background-color: #182c39;*/
     background-position: 0 25%;
@@ -109,7 +109,7 @@ button:hover {
 }
 
 .p, a {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #a {
@@ -150,27 +150,29 @@ button:hover {
     transition: color 1s;
 }
 
-.nav-pills li a,
-.nav-pills li a:focus {
-    font-weight: 500;
-    font-size: 15px;
-    color: #fff;
-    border-radius: 0;
-
-
+.navbar .navbar-nav {
+    padding-right: 50px;
 }
 
-.nav-pills li a:hover,
-.nav-pills li a:focus:hover {
+.navbar .nav-pills > li > a {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    margin: auto 5px;
+    text-shadow: #222 0.3em 0.3em 0.3em;
+}
+
+.navbar .nav-pills > li > a:hover,
+.navbar .nav-pills > li > a:focus:hover {
     color: #ffc266;
-    background-color: #212529;
     transition: color 1s;
 }
 
-.nav-pills li a.active,
-.nav-pills li a.active:focus {
-    background-color: #212529;
-    color: #ffc266;
+
+.navbar .nav-pills > li.active > a:hover,
+.navbar .nav-pills > li.active > a:focus:hover {
+    background-color: transparent;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
