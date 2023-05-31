@@ -329,18 +329,6 @@ Total cash to pay: $rowOrder[totalPrice]";
             Database::query($insertOrder);
 
         }
-
-//    Delete items from table cart
-
-        $_SESSION['payment'] = $payment;
-        if ($payment == 'Card') {
-            header("Location: checkoutTablePart3.php");
-        } else {
-            unset($_SESSION['payment']);
-            $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
-            Database::query($deleteCart);
-            header("Location: end.php");
-        }
     }
 
     static final function checkoutPar3CardPay()

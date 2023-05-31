@@ -137,6 +137,17 @@ if ($userID != 1 && $rolaId == 2) {
     if (isset($_POST['submit'])) {
         Checkout::checkoutPar3();
         Checkout::billCollect($userID);
+        //    Delete items from table cart
+        $payment = $_POST['payment'];
+        $_SESSION['payment'] = $payment;
+        if ($payment == 'Card') {
+            header("Location: checkoutCollectPart3.php");
+        } else {
+            unset($_SESSION['payment']);
+            $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+            Database::query($deleteCart);
+            header("Location: end.php");
+        }
     }
     }
     ?>
