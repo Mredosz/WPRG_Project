@@ -65,9 +65,12 @@ require_once "navbar.php";
                     while ($row = mysqli_fetch_array($resultCategory)) {
                         $id = $row['categoryID'];
                         $name = $row['name'];
+                        if ($id == 1){
+                        }else{
                         ?>
-                        <option value="<?php echo $id; ?>"><?php echo $name; ?> </option>
+                    <option value="<?php echo $id; ?>"><?php echo $name; ?> </option>
                         <?php
+                        }
                     }
                     ?>
                 </select>
