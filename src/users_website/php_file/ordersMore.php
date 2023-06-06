@@ -13,13 +13,9 @@ $usersID = $_SESSION['usersID'];
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../src/style/cart.css">
-    <link rel="stylesheet" type="text/css" href="../../../src/style/form.css">
-    <!--    Website icon-->
-    <link rel="icon" href="../../../image/icon.ico">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../style/css/bootstrap.css">
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <?php
+    require_once "../html_file/links.html";
+    ?>
 </head>
 <body>
 <?php
