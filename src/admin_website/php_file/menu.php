@@ -4,8 +4,6 @@ require_once "../../class/Database.php";
 require_once "../../class/Menu.php";
 
 if (isset($_POST['submit'])) {
-//mysqli_real_escape_string() remove all special characters from string
-    // trim remove all white space front and back of string
 //Add new item to base
     $name = Database::realString($_POST['name']);
     $price = Database::realString($_POST['price']);
@@ -13,7 +11,7 @@ if (isset($_POST['submit'])) {
     $status = Database::realString($_POST['status']);
 
     Database::query("INSERT INTO item(name, price, categoryID, status)
-    VALUES ('$name', '$price', '$category', '$status')");
+VALUES ('$name', '$price', '$category', '$status')");
     Database::disconnect();
 //        Moves to the same page
     header("Location: menu.php");
@@ -65,11 +63,11 @@ require_once "navbar.php";
                     while ($row = mysqli_fetch_array($resultCategory)) {
                         $id = $row['categoryID'];
                         $name = $row['name'];
-                        if ($id == 1){
-                        }else{
-                        ?>
-                    <option value="<?php echo $id; ?>"><?php echo $name; ?> </option>
-                        <?php
+                        // don't display most popular category
+                        if ($id != 1){
+                            ?>
+                            <option value="<?php echo $id; ?>"><?php echo $name; ?> </option>
+                            <?php
                         }
                     }
                     ?>

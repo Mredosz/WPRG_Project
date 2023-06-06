@@ -4,6 +4,7 @@ require_once "../../class/Database.php";
 require_once "../../class/Category.php";
 
 if (isset($_POST['submit'])) {
+    //Add new category to database
 Category::categoryAdd();
 //        Moves to the same page
     header("Location: category.php");

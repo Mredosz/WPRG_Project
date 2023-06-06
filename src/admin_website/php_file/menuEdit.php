@@ -37,7 +37,7 @@ require_once "navbar.php";
         <div class="col-4">
             <?php
             $num = $_GET['itemID'];
-
+            //Get information about item with this id
             $result = Database::query("SELECT item.name, price, c.name AS category, c.categoryID AS categoryID , 
             status, itemID FROM item JOIN category c on c.categoryID = item.categoryID WHERE itemID ='$num'");
             //            mysqli_fetch_array() - associative array
@@ -58,10 +58,12 @@ require_once "navbar.php";
                     while ($row = mysqli_fetch_array($resultCategory)) {
                         $id = $row['categoryID'];
                         $name = $row['name'];
-                        ?>
-                        <option value="<?php echo $id; ?>"<?php if($id == $rowItem['categoryID'])
-                        {echo"selected";} ?>><?php echo $name; ?></option>
-                        <?php
+                        if ($id != 1){
+                            ?>
+                            <option value="<?php echo $id; ?>"<?php if($id == $rowItem['categoryID'])
+                            {echo"selected";} ?>><?php echo $name; ?></option>
+                            <?php
+                        }
                     }
                     ?>
                 </select>

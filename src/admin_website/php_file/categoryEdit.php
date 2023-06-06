@@ -35,8 +35,8 @@ require_once "navbar.php";
         </div>
         <div class="col-4">
             <?php
+            //Get id from link
             $num = $_GET['categoryID'];
-            //            mysqli_fetch_array() - associative array
             $rowCategory = mysqli_fetch_array(Database::query("SELECT * FROM category WHERE categoryID ='$num'"));
             ?>
             <form method="post" action="" enctype="multipart/form-data">
@@ -65,15 +65,13 @@ require_once "navbar.php";
                 <label class="btn btn-outline-dark btn1" for="option2">OFF</label>
 
                 <div class="clearfix">
-                    <input type="hidden" name="id" value="<?php echo $rowCategory['categoryID']; ?>">
-                    <input type="hidden" name="currentImage" value="<?php echo $rowCategory['imageName']; ?>">
 
                     <button type="submit" class="updatebtn" name="update">Update</button>
                 </div>
             </form>
             <?php
             if (isset($_POST['update'])) {
-                //mysqli_real_escape_string() remove all special characters from string
+                // Send update information to database
                 Category::categoryUpdate($rowCategory);
                 //refresh website
                 header("Location: categoryEdit.php?categoryID=$rowCategory[categoryID]");
