@@ -31,10 +31,20 @@ if (!isset($_SESSION['payment'])){
     <!--    Website Title-->
     <title>Shrek's Restaurant</title>
     <!--    Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../src/style/style.css">
     <link rel="stylesheet" type="text/css" href="../../../src/style/cart.css">
-    <?php
-    require_once "../html_file/links.html";
-    ?>
+    <!--    Website icon-->
+    <link rel="icon" href="/image/icon%20-%20Copy%20-%20Copy.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../style/css/bootstrap.css">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--    Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 <body class="cart" id="cart">
 <?php
@@ -63,10 +73,12 @@ if ($userID != 1 && $rolaId == 2) {
                 <span class="pull-left"><b>E-mail: </b><?php echo $_COOKIE['email']; ?></span><br>
                 <span class="pull-left"><b>Phone Number: </b><?php echo $_COOKIE['phoneNumber']; ?></span><br>
 
+
                 <?php
                 Checkout::checkoutPar3CardPay();
                 unset($_SESSION['payment']);
                 ?>
+
                 <button type="submit" name="submit" class="btn1">Checkout</button>
         </div>
         <div class="col">
@@ -79,8 +91,47 @@ if ($userID != 1 && $rolaId == 2) {
 
     <?php
     if (isset($_POST['submit'])) {
-        Checkout::checkoutPar3();
+//    Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+
+        $payment = $_POST['payment'];
+
+//    Get the last order from this user
+        $selectOrder="SELECT * FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        $resultOrder = Database::query($selectOrder);
+        $rowOrder = mysqli_fetch_array($resultOrder);
+        $orderID = $rowOrder['orderID'];
+
+        //Update payment in order table
+        $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        Database::query($updateOrder);
+
+//    Transfer of all items to another table
+        $select="SELECT * FROM cart WHERE usersID = '$userID'";
+        $result = Database::query($select);
+        while ($row = mysqli_fetch_array($result)){
+            $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
+                            ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
+            Database::query($insertOrder);
+
+        }
+//    Delete items from table cart
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
         Checkout::billCollect($userID);
+        $payment = $_POST['payment'];
+        $_SESSION['payment'] = $payment;
+        if ($payment == 'Card') {
+            header("Location: checkoutCollectPart3.php");
+        } else {
+            unset($_SESSION['payment']);
+            $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+            Database::query($deleteCart);
+            header("Location: end.php");
+        }
     }
     ?>
 </div>
@@ -125,9 +176,45 @@ if ($userID != 1 && $rolaId == 2) {
 
     <?php
     if (isset($_POST['submit'])) {
-        Checkout::checkoutPar3();
+//    Get date from cookie
+        $firstName = $_COOKIE['firstName'];
+        $lastName = $_COOKIE['lastName'];
+        $email = $_COOKIE['email'];
+        $phoneNumber = $_COOKIE['phoneNumber'];
+
+        $payment = $_POST['payment'];
+
+//    Get userID from database
+        $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
+                        AND email = '$email' AND rolaID = '1'";
+        $resultUser = Database::query($selectUser);
+        $rowUsers = mysqli_fetch_array($resultUser);
+        $userID = $rowUsers['usersID'];
+        $_SESSION['userID'] = $userID;
+
+//    Get the last order from this user
+        $selectOrder = "SELECT * FROM `order` WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        $resultOrder = Database::query($selectOrder);
+        $rowOrder = mysqli_fetch_array($resultOrder);
+        $orderID = $rowOrder['orderID'];
+
+        //Update payment in order table
+        $updateOrder = "UPDATE `order` SET payment = '$payment' WHERE usersID = '$userID' ORDER BY orderID DESC LIMIT 1";
+        Database::query($updateOrder);
+
+//    Transfer of all items to another table
+        $select = "SELECT * FROM cart WHERE usersID = '$userID'";
+        $result = Database::query($select);
+        while ($row = mysqli_fetch_array($result)) {
+            $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
+                            ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
+            Database::query($insertOrder);
+
+        }
+//    Delete items from table cart
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
         Checkout::billCollect($userID);
-        //    Delete items from table cart
         $payment = $_POST['payment'];
         $_SESSION['payment'] = $payment;
         if ($payment == 'Card') {

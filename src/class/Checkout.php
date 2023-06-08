@@ -304,7 +304,7 @@ Total cash to pay: $rowOrder[totalPrice]";
 
 //    Get userID from database
         $selectUser = "SELECT * FROM users WHERE firstName='$firstName' AND lastName = '$lastName' 
-                        AND email = '$email' AND rolaID = '1'";
+                        AND email = '$email' AND rolaID = '2'";
         $resultUser = Database::query($selectUser);
         $rowUsers = mysqli_fetch_array($resultUser);
         $userID = $rowUsers['usersID'];
@@ -327,8 +327,9 @@ Total cash to pay: $rowOrder[totalPrice]";
             $insertOrder = "INSERT INTO order_position (orderID, itemID, quantity, total) VALUES 
                             ('$orderID', '$row[itemID]', ' $row[quantity]', '$row[totalPrice]' )";
             Database::query($insertOrder);
-
         }
+        $deleteCart = "DELETE FROM cart WHERE usersID = '$userID'";
+        Database::query($deleteCart);
     }
 
     static final function checkoutPar3CardPay()

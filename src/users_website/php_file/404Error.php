@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <!--    Website Title-->
     <title>Shrek's Restaurant</title>
-    <?php
-    require_once "../html_file/links.html";
-    ?>
+    <!--    Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../src/style/404Error.css">
+    <!--    Website icon-->
+    <link rel="icon" href="../../../image/icon.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../style/css/bootstrap.css">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="row-cols-1 text-center tex">
